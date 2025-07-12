@@ -6,9 +6,10 @@
   <title>My Projects Portfolio</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* Custom styles for dark theme inspired by lockedin.tech */
+    /* --- 修改這裡 --- */
+    /* 將漸變背景改成更深沉嘅色調 */
     .dark-gradient-bg {
-      background: linear-gradient(135deg, #1f2937 0%, #4b5563 100%);
+      background: linear-gradient(135deg, #111111 0%, #222222 100%);
     }
     .card-hover {
       transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -22,7 +23,8 @@
     }
   </style>
 </head>
-<body class="font-sans text-gray-200 bg-gray-900 smooth-scroll">
+<!-- --- 修改這裡：將 bg-gray-900 改成 bg-black --- -->
+<body class="font-sans text-gray-200 bg-black smooth-scroll">
   <!-- Header -->
   <header class="dark-gradient-bg text-gray-200 fixed w-full top-0 z-10 shadow-lg">
     <nav class="container mx-auto flex justify-between items-center py-4 px-6">
@@ -45,20 +47,23 @@
   </section>
 
   <!-- Projects Section -->
-  <section id="projects" class="py-16 bg-gray-800">
+  <!-- --- 修改這裡：將 bg-gray-800 改成 bg-gray-900 --- -->
+  <section id="projects" class="py-16 bg-gray-900">
     <div class="container mx-auto px-6">
       <h2 class="text-4xl font-bold text-center mb-12 text-gray-200">My Projects</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <!-- Project 1 -->
-        <div class="bg-gray-700 p-6 rounded-lg card-hover">
-          <img src="images/project1.png" alt="Android Project" class="w-full h-64 object-cover rounded-md mb-4">
+        <!-- --- 修改這裡：將 bg-gray-700 改成 bg-gray-800 --- -->
+        <div class="bg-gray-800 p-6 rounded-lg card-hover">
+          <img src="https://placehold.co/600x400/1F2937/FFFFFF?text=Android+Project" alt="Android Project" class="w-full h-64 object-cover rounded-md mb-4">
           <h3 class="text-2xl font-semibold mb-2 text-gray-200">Android Project</h3>
           <p class="text-gray-400 mb-4">An Android app built with Kotlin, featuring a user-friendly interface and robust functionality. [Add your project description here].</p>
           <a href="https://github.com/yourusername/android-project" class="text-blue-400 hover:underline">View on GitHub</a>
         </div>
         <!-- Project 2 -->
-        <div class="bg-gray-700 p-6 rounded-lg card-hover">
-          <img src="images/project2.png" alt="iOS Project" class="w-full h-64 object-cover rounded-md mb-4">
+        <!-- --- 修改這裡：將 bg-gray-700 改成 bg-gray-800 --- -->
+        <div class="bg-gray-800 p-6 rounded-lg card-hover">
+          <img src="https://placehold.co/600x400/1F2937/FFFFFF?text=iOS+Project" alt="iOS Project" class="w-full h-64 object-cover rounded-md mb-4">
           <h3 class="text-2xl font-semibold mb-2 text-gray-200">iOS Project</h3>
           <p class="text-gray-400 mb-4">An iOS app developed using Swift, offering a seamless experience. [Add your project description here].</p>
           <a href="https://github.com/yourusername/ios-project" class="text-blue-400 hover:underline">View on GitHub</a>
@@ -68,7 +73,8 @@
   </section>
 
   <!-- Contact Section -->
-  <section id="contact" class="py-16 bg-gray-900">
+  <!-- --- 修改這裡：將 bg-gray-900 改成 bg-black --- -->
+  <section id="contact" class="py-16 bg-black">
     <div class="container mx-auto px-6 text-center">
       <h2 class="text-4xl font-bold mb-6 text-gray-200">Get in Touch</h2>
       <p class="text-xl text-gray-400 mb-8">Interested in collaboration? Reach out!</p>
@@ -84,12 +90,18 @@
   <script>
     // Simple animation for fade-in effect
     document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('.animate-fade-in').forEach(el => {
-        el.classList.add('opacity-0');
+      // This is a placeholder for a fade-in animation, which might not be visible
+      // with the current Tailwind setup. For a true fade-in, you'd add transition classes.
+      const fadeInElements = document.querySelectorAll('.animate-fade-in');
+      fadeInElements.forEach(el => {
+        el.style.opacity = '0';
         setTimeout(() => {
-          el.classList.remove('opacity-0');
-          el.classList.add('opacity-100', 'transition-opacity', 'duration-1000');
+          el.style.transition = 'opacity 1s ease';
+          el.style.opacity = '1';
         }, 100);
       });
     });
   </script>
+
+</body>
+</html>
