@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Projects Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom styles for dark theme inspired by lockedin.tech */
+    .dark-gradient-bg {
+      background: linear-gradient(135deg, #1f2937 0%, #4b5563 100%);
+    }
+    .card-hover {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    }
+    .smooth-scroll {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="font-sans text-gray-200 bg-gray-900 smooth-scroll">
+  <!-- Header -->
+  <header class="dark-gradient-bg text-gray-200 fixed w-full top-0 z-10 shadow-lg">
+    <nav class="container mx-auto flex justify-between items-center py-4 px-6">
+      <h1 class="text-2xl font-bold">My Portfolio</h1>
+      <ul class="flex space-x-6">
+        <li><a href="#home" class="hover:text-blue-400 transition-colors">Home</a></li>
+        <li><a href="#projects" class="hover:text-blue-400 transition-colors">Projects</a></li>
+        <li><a href="#contact" class="hover:text-blue-400 transition-colors">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="min-h-screen flex items-center justify-center dark-gradient-bg text-gray-200">
+    <div class="text-center px-6">
+      <h2 class="text-5xl font-extrabold mb-4 animate-fade-in">Welcome to My Portfolio</h2>
+      <p class="text-xl mb-6">Showcasing my Android and iOS projects with a modern dark theme</p>
+      <a href="#projects" class="bg-blue-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-600 transition-colors">Explore Projects</a>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="py-16 bg-gray-800">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-12 text-gray-200">My Projects</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Project 1 -->
+        <div class="bg-gray-700 p-6 rounded-lg card-hover">
+          <img src="images/project1.png" alt="Android Project" class="w-full h-64 object-cover rounded-md mb-4">
+          <h3 class="text-2xl font-semibold mb-2 text-gray-200">Android Project</h3>
+          <p class="text-gray-400 mb-4">An Android app built with Kotlin, featuring a user-friendly interface and robust functionality. [Add your project description here].</p>
+          <a href="https://github.com/yourusername/android-project" class="text-blue-400 hover:underline">View on GitHub</a>
+        </div>
+        <!-- Project 2 -->
+        <div class="bg-gray-700 p-6 rounded-lg card-hover">
+          <img src="images/project2.png" alt="iOS Project" class="w-full h-64 object-cover rounded-md mb-4">
+          <h3 class="text-2xl font-semibold mb-2 text-gray-200">iOS Project</h3>
+          <p class="text-gray-400 mb-4">An iOS app developed using Swift, offering a seamless experience. [Add your project description here].</p>
+          <a href="https://github.com/yourusername/ios-project" class="text-blue-400 hover:underline">View on GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-16 bg-gray-900">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-4xl font-bold mb-6 text-gray-200">Get in Touch</h2>
+      <p class="text-xl text-gray-400 mb-8">Interested in collaboration? Reach out!</p>
+      <a href="mailto:your.email@example.com" class="bg-blue-500 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-600 transition-colors">Contact Me</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="dark-gradient-bg text-gray-200 text-center py-6">
+    <p>© 2025 My Portfolio. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Simple animation for fade-in effect
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.animate-fade-in').forEach(el => {
+        el.classList.add('opacity-0');
+        setTimeout(() => {
+          el.classList.remove('opacity-0');
+          el.classList.add('opacity-100', 'transition-opacity', 'duration-1000');
+        }, 100);
+      });
+    });
+  </script>
