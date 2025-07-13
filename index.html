@@ -1,107 +1,491 @@
 <!DOCTYPE html>
-<html lang="zh-HK">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Projects Portfolio</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    /* --- 修改這裡 --- */
-    /* 將漸變背景改成更深沉嘅色調 */
-    .dark-gradient-bg {
-      background: linear-gradient(135deg, #111111 0%, #222222 100%);
-    }
-    .card-hover {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .card-hover:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-    }
-    .smooth-scroll {
-      scroll-behavior: smooth;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fireshark Tech - Professional App Development</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: #ffffff;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+
+        /* Apps Section */
+        .apps-section {
+            padding: 5rem 0;
+            background-color: #1a1a1a;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #ffffff 0%, #667eea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .app-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .app-card:hover::before {
+            left: 100%;
+        }
+
+        .app-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .app-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .app-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .app-card p {
+            color: #b0b0b0;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .download-btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9rem;
+        }
+
+        .app-store {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff;
+        }
+
+        .google-play {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d1b69 100%);
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            color: #b0b0b0;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 5rem 0;
+            background-color: #121212;
+        }
+
+        .contact-content {
+            text-align: center;
+        }
+
+        .contact-email {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+        }
+
+        .contact-email:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d1b69 100%);
+            color: #b0b0b0;
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-weight: 300;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .apps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .download-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .download-btn {
+                width: 100%;
+                max-width: 200px;
+            }
+
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .app-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
 </head>
-<!-- --- 修改這裡：將 bg-gray-900 改成 bg-black --- -->
-<body class="font-sans text-gray-200 bg-black smooth-scroll">
-  <!-- Header -->
-  <header class="dark-gradient-bg text-gray-200 fixed w-full top-0 z-10 shadow-lg">
-    <nav class="container mx-auto flex justify-between items-center py-4 px-6">
-      <h1 class="text-2xl font-bold">My Portfolio</h1>
-      <ul class="flex space-x-6">
-        <li><a href="#home" class="hover:text-blue-400 transition-colors">Home</a></li>
-        <li><a href="#projects" class="hover:text-blue-400 transition-colors">Projects</a></li>
-        <li><a href="#contact" class="hover:text-blue-400 transition-colors">Contact</a></li>
-      </ul>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Fireshark Tech</div>
+            <ul class="nav-links">
+                <li><a href="#home">My Apps</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
     </nav>
-  </header>
 
-  <!-- Hero Section -->
-  <section id="home" class="min-h-screen flex items-center justify-center dark-gradient-bg text-gray-200">
-    <div class="text-center px-6">
-      <h2 class="text-5xl font-extrabold mb-4 animate-fade-in">Welcome to My Portfolio</h2>
-      <p class="text-xl mb-6">Showcasing my Android and iOS projects with a modern dark theme</p>
-      <a href="#projects" class="bg-blue-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-600 transition-colors">Explore Projects</a>
-    </div>
-  </section>
+    <!-- Apps Portfolio Section -->
+    <section id="home" class="apps-section" style="padding-top: 8rem;">
+        <div class="container">
+            <h2 class="section-title">My Applications</h2>
+            <div class="apps-grid">
+                <!-- App 1: Goodbus -->
+                <div class="app-card">
+                    <img src="image/app_icon/goodbus_icon.png" alt="Goodbus App Icon" class="app-icon">
+                    <h3>Goodbus</h3>
+                    <p>Hong Kong bus arrival time app that helps you easily track bus schedules and timing information.</p>
+                    <div class="download-buttons">
+                        <a href="https://apps.apple.com/hk/app/goodbus-%E9%A6%99%E6%B8%AF%E5%B7%B4%E5%A3%AB%E5%88%B0%E7%AB%99%E6%99%82%E9%96%93/id1573111465" class="download-btn app-store" target="_blank">App Store</a>
+                        <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.goodbus" class="download-btn google-play" target="_blank">Google Play</a>
+                    </div>
+                </div>
 
-  <!-- Projects Section -->
-  <!-- --- 修改這裡：將 bg-gray-800 改成 bg-gray-900 --- -->
-  <section id="projects" class="py-16 bg-gray-900">
-    <div class="container mx-auto px-6">
-      <h2 class="text-4xl font-bold text-center mb-12 text-gray-200">My Projects</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- Project 1 -->
-        <!-- --- 修改這裡：將 bg-gray-700 改成 bg-gray-800 --- -->
-        <div class="bg-gray-800 p-6 rounded-lg card-hover">
-          <img src="https://placehold.co/600x400/1F2937/FFFFFF?text=Android+Project" alt="Android Project" class="w-full h-64 object-cover rounded-md mb-4">
-          <h3 class="text-2xl font-semibold mb-2 text-gray-200">Android Project</h3>
-          <p class="text-gray-400 mb-4">An Android app built with Kotlin, featuring a user-friendly interface and robust functionality. [Add your project description here].</p>
-          <a href="https://github.com/yourusername/android-project" class="text-blue-400 hover:underline">View on GitHub</a>
+                <!-- App 2: SonLink TV Remote -->
+                <div class="app-card">
+                    <img src="image/app_icon/sony_remote_icon.png" alt="SonLink TV Remote App Icon" class="app-icon">
+                    <h3>SonLink: TV Remote</h3>
+                    <p>Smart remote control designed specifically for Bravia TVs, providing complete control experience.</p>
+                    <div class="download-buttons">
+                        <a href="https://apps.apple.com/hk/app/sony-tv-remote-bravia-tv/id6474549094" class="download-btn app-store" target="_blank">App Store</a>
+                        <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.sony.bravia.tv.remote" class="download-btn google-play" target="_blank">Google Play</a>
+                    </div>
+                </div>
+
+                <!-- App 3: Sam Remote -->
+                <div class="app-card">
+                    <img src="image/app_icon/samsung_remote_icon.png" alt="Sam Remote App Icon" class="app-icon">
+                    <h3>Sam Remote: Smart TV Remote</h3>
+                    <p>Smart TV remote control supporting Tizen OS TV with comprehensive remote control features.</p>
+                    <div class="download-buttons">
+                        <a href="https://apps.apple.com/hk/app/remotex-smart-tv-remote/id6743916971" class="download-btn app-store" target="_blank">App Store</a>
+                        <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.remotex.smarttvremote" class="download-btn google-play" target="_blank">Google Play</a>
+                    </div>
+                </div>
+
+                <!-- App 4: Pon Pon Math -->
+                <div class="app-card">
+                    <img src="image/app_icon/ponpon_math_icon.png" alt="Pon Pon Math App Icon" class="app-icon">
+                    <h3>Pon Pon Math</h3>
+                    <p>Fun math game that helps children learn mathematics through gameplay and improve calculation skills.</p>
+                    <div class="download-buttons">
+                        <a href="https://apps.apple.com/hk/app/pon-pon-math/id6479554927" class="download-btn app-store" target="_blank">App Store</a>
+                        <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.ponponmath" class="download-btn google-play" target="_blank">Google Play</a>
+                    </div>
+                </div>
+
+                <!-- App 5: LG WebOS TV Remote -->
+                <div class="app-card">
+                    <img src="image/app_icon/lg_remote_icon.png" alt="LG WebOS TV Remote App Icon" class="app-icon">
+                    <h3>Remote for WebOS TV</h3>
+                    <p>Smart TV remote control app specifically designed for LG WebOS TVs with intuitive interface.</p>
+                    <div class="download-buttons">
+                        <a href="https://apps.apple.com/us/app/smart-tv-remote-thing-tv/id6745806542" class="download-btn app-store" target="_blank">App Store</a>
+                        <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.smarttvremote.webos" class="download-btn google-play" target="_blank">Google Play</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- Project 2 -->
-        <!-- --- 修改這裡：將 bg-gray-700 改成 bg-gray-800 --- -->
-        <div class="bg-gray-800 p-6 rounded-lg card-hover">
-          <img src="https://placehold.co/600x400/1F2937/FFFFFF?text=iOS+Project" alt="iOS Project" class="w-full h-64 object-cover rounded-md mb-4">
-          <h3 class="text-2xl font-semibold mb-2 text-gray-200">iOS Project</h3>
-          <p class="text-gray-400 mb-4">An iOS app developed using Swift, offering a seamless experience. [Add your project description here].</p>
-          <a href="https://github.com/yourusername/ios-project" class="text-blue-400 hover:underline">View on GitHub</a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <h2 class="section-title">About Fireshark Tech</h2>
+                <p>Fireshark Tech is dedicated to developing practical and intuitive mobile applications. We focus on TV remote controls, transportation tools, and educational games, providing users with quality digital experiences. Each application is carefully designed to ensure the perfect combination of functionality and aesthetics, making technology truly serve life.</p>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Contact Section -->
-  <!-- --- 修改這裡：將 bg-gray-900 改成 bg-black --- -->
-  <section id="contact" class="py-16 bg-black">
-    <div class="container mx-auto px-6 text-center">
-      <h2 class="text-4xl font-bold mb-6 text-gray-200">Get in Touch</h2>
-      <p class="text-xl text-gray-400 mb-8">Interested in collaboration? Reach out!</p>
-      <a href="mailto:your.email@example.com" class="bg-blue-500 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-600 transition-colors">Contact Me</a>
-    </div>
-  </section>
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="contact-content">
+                <h2 class="section-title">Contact Me</h2>
+                <p>For any collaboration or technical questions, feel free to contact us</p>
+                <a href="mailto:hello@fireshark.tech" class="contact-email">hello@fireshark.tech</a>
+            </div>
+        </div>
+    </section>
 
-  <!-- Footer -->
-  <footer class="dark-gradient-bg text-gray-200 text-center py-6">
-    <p>© 2025 My Portfolio. All rights reserved.</p>
-  </footer>
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2025 Fireshark. All rights reserved.</p>
+    </footer>
 
-  <script>
-    // Simple animation for fade-in effect
-    document.addEventListener('DOMContentLoaded', () => {
-      // This is a placeholder for a fade-in animation, which might not be visible
-      // with the current Tailwind setup. For a true fade-in, you'd add transition classes.
-      const fadeInElements = document.querySelectorAll('.animate-fade-in');
-      fadeInElements.forEach(el => {
-        el.style.opacity = '0';
-        setTimeout(() => {
-          el.style.transition = 'opacity 1s ease';
-          el.style.opacity = '1';
-        }, 100);
-      });
-    });
-  </script>
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
 
+        // Mobile menu toggle (basic implementation)
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Add scroll effect to navbar
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(18, 18, 18, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(18, 18, 18, 0.95)';
+            }
+        });
+
+        // Animate elements on scroll (intersection observer)
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Apply animation to app cards
+        document.querySelectorAll('.app-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
 </body>
 </html>
