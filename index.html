@@ -246,11 +246,30 @@
             font-size: 0.85rem;
             font-weight: 500;
             transition: color 0.2s ease, transform 0.2s ease;
+            position: relative;
+            z-index: 2;
         }
 
         .learn-more:hover {
             color: #b8c2ff;
             transform: translateX(4px);
+        }
+
+        .app-card.clickable {
+            cursor: pointer;
+        }
+
+        .card-link-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            text-indent: -9999px;
+            overflow: hidden;
+        }
+
+        .app-card .download-btn {
+            position: relative;
+            z-index: 2;
         }
 
         /* Contact Section */
@@ -407,7 +426,8 @@
             <div class="apps-grid">
 
                      <!-- App 2: SonLink TV Remote -->
-                     <div class="app-card">
+                     <div class="app-card clickable">
+                        <a href="apps/sonlink/" class="card-link-overlay" aria-label="Learn more about SonLink">SonLink details</a>
                         <img src="image/app_icon/sony_remote_icon.png" alt="SonLink TV Remote App Icon" class="app-icon">
                         <h3>SonLink: TV Remote</h3>
                         <p>Smart remote control designed specifically for Sony Bravia TVs, providing complete control experience.</p>
