@@ -105,13 +105,19 @@
             position: relative;
             z-index: 1;
         }
-        .hero-content { max-width: 560px; }
+        .hero-content {
+            max-width: 560px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
         .hero-icon {
             width: 72px;
             height: 72px;
             border-radius: 18px;
             margin-bottom: 1.5rem;
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+            display: block;
         }
         .hero-eyebrow {
             display: inline-block;
@@ -518,7 +524,10 @@
                 text-align: center;
                 gap: 3rem;
             }
-            .hero-content { margin: 0 auto; }
+            .hero-content {
+                margin: 0 auto;
+                align-items: center;
+            }
             .hero-buttons { justify-content: center; }
             .why-grid { grid-template-columns: 1fr; }
             .steps { grid-template-columns: 1fr; gap: 1.5rem; }
