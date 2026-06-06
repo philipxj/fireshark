@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal TV Remote App for iPhone &amp; Android — Samsung, LG, Sony &amp; More | SuperMote</title>
+    <meta name="description" content="SuperMote turns your phone into a universal smart TV remote for Samsung, LG, Sony BRAVIA, TCL, Hisense, Philips, Xiaomi, Google TV and more. Pair over Wi-Fi in seconds. Free, no account, no ads.">
+    <meta name="keywords" content="universal tv remote app, samsung tv remote app, lg tv remote app, smart tv remote, control tv with phone, lost tv remote, tcl tv remote, hisense tv remote, google tv remote, wifi tv remote">
+    <meta name="theme-color" content="#121212">
+    <link rel="canonical" href="https://fireshark.tech/apps/supermote/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fireshark.tech/apps/supermote/">
+    <meta property="og:title" content="SuperMote — Universal Smart TV Remote for iPhone &amp; Android">
+    <meta property="og:description" content="One remote for every TV in your home — Samsung, LG, Sony, TCL, Hisense, Google TV and more. Pair over Wi-Fi in seconds.">
+    <meta property="og:image" content="https://fireshark.tech/image/app_icon/supermote_icon.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SuperMote — Universal Smart TV Remote">
+    <meta name="twitter:description" content="One remote for every TV in your home — Samsung, LG, Sony, TCL, Hisense, Google TV and more.">
+    <meta name="twitter:image" content="https://fireshark.tech/image/app_icon/supermote_icon.png">
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%25' stop-color='%23667eea'/><stop offset='100%25' stop-color='%23764ba2'/></linearGradient></defs><rect width='64' height='64' rx='14' fill='url(%23g)'/><text x='50%25' y='50%25' dy='.35em' text-anchor='middle' font-family='Inter, Arial, sans-serif' font-size='40' font-weight='700' fill='white'>F</text></svg>">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Structured data: app name, price and platforms for Google rich results -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "SuperMote: Smart TV Remote",
+      "operatingSystem": "iOS, Android",
+      "applicationCategory": "UtilitiesApplication",
+      "description": "SuperMote turns your iPhone or Android phone into a universal Wi-Fi remote for Samsung, LG, Sony BRAVIA, TCL, Hisense, Philips, Xiaomi, Google TV, NVIDIA SHIELD and Chromecast smart TVs.",
+      "image": "https://fireshark.tech/image/app_icon/supermote_icon.png",
+      "url": "https://fireshark.tech/apps/supermote/",
+      "downloadUrl": "https://apps.apple.com/hk/app/superremote-tv-remote/id6743916971",
+      "author": { "@type": "Organization", "name": "Fireshark Tech", "url": "https://fireshark.tech/" },
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0d11;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ---- Navbar ---- */
+        .navbar {
+            position: fixed; top: 0; width: 100%;
+            background: rgba(13, 13, 17, 0.85);
+            backdrop-filter: blur(12px);
+            padding: 1rem 0; z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .nav-container {
+            max-width: 1200px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 2rem;
+        }
+        .nav-back { color: #b0b0b0; text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+        .nav-back:hover { color: #667eea; }
+        .nav-cta {
+            padding: 0.5rem 1.2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff; text-decoration: none; border-radius: 8px;
+            font-size: 0.85rem; font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4); }
+
+        /* ---- Hero ---- */
+        .hero { position: relative; padding: 9rem 0 5rem; overflow: hidden; }
+        .hero::before {
+            content: ''; position: absolute; top: -20%; left: 50%;
+            transform: translateX(-50%); width: 800px; height: 800px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.18) 0%, transparent 60%);
+            z-index: 0;
+        }
+        .hero-container {
+            max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+            display: grid; grid-template-columns: 1.1fr 1fr; gap: 4rem;
+            align-items: center; position: relative; z-index: 1;
+        }
+        .hero-content { max-width: 560px; display: flex; flex-direction: column; align-items: flex-start; }
+        .hero-icon {
+            width: 72px; height: 72px; border-radius: 18px; margin-bottom: 1.5rem;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4); display: block;
+        }
+        .hero-eyebrow {
+            display: inline-block; color: #8c9eff; font-size: 0.8rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 1rem;
+            padding: 0.3rem 0.8rem; background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.25); border-radius: 999px;
+        }
+        .hero h1 {
+            font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 800;
+            line-height: 1.15; margin-bottom: 1.25rem; letter-spacing: -0.02em;
+        }
+        .hero h1 .gradient {
+            background: linear-gradient(135deg, #667eea 0%, #a78bfa 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .hero p.lede { font-size: 1.15rem; color: #b8b8c0; margin-bottom: 2rem; font-weight: 300; }
+        .hero-buttons { display: flex; gap: 0.85rem; flex-wrap: wrap; }
+        .btn {
+            padding: 0.9rem 1.6rem; border-radius: 12px; text-decoration: none;
+            font-weight: 600; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 0.5rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn-primary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; }
+        .btn-secondary { background: rgba(255, 255, 255, 0.06); color: #fff; border: 1px solid rgba(255, 255, 255, 0.15); }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(102, 126, 234, 0.3); }
+
+        /* Hero brand showcase (instead of phone screenshot) */
+        .hero-brands {
+            position: relative; display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 0.85rem;
+        }
+        .hero-brands::before {
+            content: ''; position: absolute; inset: -10% -10%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.22) 0%, transparent 65%); z-index: 0;
+        }
+        .brand-chip {
+            position: relative; z-index: 1;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-radius: 14px; padding: 1rem 1.1rem;
+            font-weight: 600; font-size: 0.95rem; color: #e8e8ee;
+            display: flex; align-items: center; gap: 0.6rem;
+        }
+        .brand-chip .dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #a78bfa); flex: 0 0 auto;
+        }
+
+        /* ---- Sections ---- */
+        section { padding: 5rem 0; position: relative; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .section-eyebrow {
+            color: #8c9eff; font-size: 0.8rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 0.75rem; text-align: center;
+        }
+        .section-title {
+            text-align: center; font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 700; margin-bottom: 1rem; letter-spacing: -0.02em;
+        }
+        .section-subtitle {
+            text-align: center; color: #b0b0b0; font-size: 1.05rem; font-weight: 300;
+            max-width: 640px; margin: 0 auto 3.5rem;
+        }
+
+        /* ---- Supported brands ---- */
+        .brands { background: linear-gradient(180deg, transparent, rgba(102, 126, 234, 0.04)); }
+        .brands-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem; margin-top: 2rem;
+        }
+        .brand-card {
+            padding: 1.4rem 1.25rem; border-radius: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .brand-card:hover { transform: translateY(-4px); border-color: rgba(102, 126, 234, 0.35); }
+        .brand-card h4 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.2rem; }
+        .brand-card p { color: #9a9aa3; font-size: 0.85rem; font-weight: 300; }
+
+        /* ---- Features ---- */
+        .features-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem; margin-top: 3rem;
+        }
+        .feature {
+            padding: 2rem; border-radius: 18px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .feature:hover { transform: translateY(-4px); border-color: rgba(102, 126, 234, 0.3); }
+        .feature-icon {
+            width: 48px; height: 48px; border-radius: 12px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(167, 139, 250, 0.15));
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 1.25rem; font-size: 1.4rem;
+        }
+        .feature h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .feature p { color: #9a9aa3; font-size: 0.95rem; font-weight: 300; }
+
+        /* ---- Compatibility ---- */
+        .compat-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.06), rgba(167, 139, 250, 0.03));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px; padding: 3rem; margin-top: 2rem;
+        }
+        .compat-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
+        .compat-item h4 { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; color: #fff; }
+        .compat-item p { color: #9a9aa3; font-size: 0.9rem; font-weight: 300; }
+
+        /* ---- How it works ---- */
+        .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+        .step { text-align: center; padding: 1rem; }
+        .step-number {
+            width: 56px; height: 56px; border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #a78bfa 100%);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; font-weight: 700; margin: 0 auto 1.25rem;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.25);
+        }
+        .step h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .step p { color: #9a9aa3; font-size: 0.95rem; font-weight: 300; }
+
+        /* ---- FAQ ---- */
+        .faq { max-width: 800px; margin: 3rem auto 0; }
+        .faq-item { border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+        .faq-q {
+            width: 100%; background: none; border: none; color: #fff; text-align: left;
+            padding: 1.5rem 0; font-size: 1.05rem; font-weight: 500; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center; font-family: inherit;
+        }
+        .faq-q::after { content: '+'; font-size: 1.4rem; color: #8c9eff; transition: transform 0.2s ease; font-weight: 300; }
+        .faq-item.open .faq-q::after { transform: rotate(45deg); }
+        .faq-a { max-height: 0; overflow: hidden; color: #b0b0b0; font-weight: 300; transition: max-height 0.3s ease, padding 0.3s ease; }
+        .faq-item.open .faq-a { max-height: 240px; padding-bottom: 1.5rem; }
+
+        /* ---- CTA ---- */
+        .cta {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(167, 139, 250, 0.06));
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .cta h2 { font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 700; margin-bottom: 1rem; }
+        .cta p { color: #b0b0b0; margin-bottom: 2rem; font-weight: 300; }
+
+        /* ---- Footer ---- */
+        footer { padding: 2.5rem 0; background: #0a0a0e; text-align: center; color: #707078; font-size: 0.85rem; font-weight: 300; }
+        footer a { color: #b0b0b0; text-decoration: none; margin: 0 0.6rem; }
+        footer a:hover { color: #8c9eff; }
+        .footer-links { margin-bottom: 1rem; }
+
+        /* ---- Mobile ---- */
+        @media (max-width: 900px) {
+            .hero-container { grid-template-columns: 1fr; text-align: center; gap: 3rem; }
+            .hero-content { margin: 0 auto; align-items: center; }
+            .hero-buttons { justify-content: center; }
+            .steps { grid-template-columns: 1fr; gap: 1.5rem; }
+        }
+        @media (max-width: 600px) {
+            .nav-container { padding: 0 1rem; }
+            .container { padding: 0 1rem; }
+            .hero { padding-top: 7rem; }
+            .compat-card { padding: 1.75rem; }
+            .hero-brands { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-back">← Fireshark Tech</a>
+            <a href="https://apps.apple.com/hk/app/superremote-tv-remote/id6743916971" class="nav-cta" target="_blank">Get SuperMote</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <img src="../../image/app_icon/supermote_icon.png" alt="SuperMote app icon" class="hero-icon">
+                <span class="hero-eyebrow">Works with every major TV brand</span>
+                <h1>One remote for <span class="gradient">every TV in your home</span>.</h1>
+                <p class="lede">Lost your TV remote again? SuperMote turns your phone into a universal Wi-Fi remote for Samsung, LG, Sony BRAVIA, TCL, Hisense, Google TV and more — pair in seconds, control them all from one clean app.</p>
+                <div class="hero-buttons">
+                    <a href="https://apps.apple.com/hk/app/superremote-tv-remote/id6743916971" class="btn btn-primary" target="_blank">Download on App Store</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.remotex.smarttvremote" class="btn btn-secondary" target="_blank">Get on Google Play</a>
+                </div>
+            </div>
+            <div class="hero-brands">
+                <div class="brand-chip"><span class="dot"></span>Samsung</div>
+                <div class="brand-chip"><span class="dot"></span>LG</div>
+                <div class="brand-chip"><span class="dot"></span>Sony BRAVIA</div>
+                <div class="brand-chip"><span class="dot"></span>Google TV</div>
+                <div class="brand-chip"><span class="dot"></span>TCL</div>
+                <div class="brand-chip"><span class="dot"></span>Hisense</div>
+                <div class="brand-chip"><span class="dot"></span>Philips</div>
+                <div class="brand-chip"><span class="dot"></span>Xiaomi</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Supported brands -->
+    <section class="brands">
+        <div class="container">
+            <div class="section-eyebrow">Compatibility</div>
+            <h2 class="section-title">One app, every screen.</h2>
+            <p class="section-subtitle">SuperMote speaks to a wide range of Wi-Fi smart TVs and streaming devices. No more juggling a drawer full of remotes.</p>
+            <div class="brands-grid">
+                <div class="brand-card"><h4>Samsung</h4><p>Smart TVs over Wi-Fi</p></div>
+                <div class="brand-card"><h4>LG</h4><p>webOS smart TVs</p></div>
+                <div class="brand-card"><h4>Sony BRAVIA</h4><p>Android / Google TV</p></div>
+                <div class="brand-card"><h4>Google TV</h4><p>Google TV devices</p></div>
+                <div class="brand-card"><h4>TCL</h4><p>Smart &amp; Google TVs</p></div>
+                <div class="brand-card"><h4>Hisense</h4><p>Smart TVs</p></div>
+                <div class="brand-card"><h4>Philips</h4><p>Smart TVs</p></div>
+                <div class="brand-card"><h4>Xiaomi</h4><p>Mi / Xiaomi TVs</p></div>
+                <div class="brand-card"><h4>NVIDIA SHIELD</h4><p>Android TV streamer</p></div>
+                <div class="brand-card"><h4>Chromecast</h4><p>with Google TV</p></div>
+            </div>
+            <p class="section-subtitle" style="margin: 2.5rem auto 0; font-size: 0.9rem;">Compatibility may vary by brand, model, region, software version, and your TV's network remote control settings.</p>
+        </div>
+    </section>
+
+    <!-- Why / Sony note -->
+    <section>
+        <div class="container">
+            <div class="section-eyebrow">Features</div>
+            <h2 class="section-title">Everything you need, nothing you don't.</h2>
+            <p class="section-subtitle">A complete remote, distilled into the buttons and gestures you actually reach for.</p>
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">📺</div>
+                    <h3>Full TV Control</h3>
+                    <p>Power, volume, mute, channels, navigation and playback — the familiar buttons, on your phone.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📡</div>
+                    <h3>Quick Discovery</h3>
+                    <p>SuperMote scans your Wi-Fi and finds supported smart TVs nearby, automatically.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔗</div>
+                    <h3>Easy Pairing</h3>
+                    <p>Connect with your TV's standard on-screen pairing or approval. No complicated setup.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">👆</div>
+                    <h3>Touchpad Navigation</h3>
+                    <p>Swipe and tap to move through menus and apps on supported TVs.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🏠</div>
+                    <h3>Multi-TV Support</h3>
+                    <p>Save and switch between every TV in your home — bedroom, living room, anywhere.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Local &amp; Private</h3>
+                    <p>Works over your own Wi-Fi. No account required to control your TVs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it works -->
+    <section>
+        <div class="container">
+            <div class="section-eyebrow">Get started in 60 seconds</div>
+            <h2 class="section-title">Three steps. That's it.</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Connect to Wi-Fi</h3>
+                    <p>Put your phone and TV on the same Wi-Fi network.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Scan &amp; pair</h3>
+                    <p>Open SuperMote, scan for devices, pick your TV and confirm on the screen.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Control away</h3>
+                    <p>Power, volume, navigation and more — all from your phone, instantly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compatibility details -->
+    <section>
+        <div class="container">
+            <div class="section-eyebrow">Requirements</div>
+            <h2 class="section-title">What you need.</h2>
+            <div class="compat-card">
+                <div class="compat-list">
+                    <div class="compat-item">
+                        <h4>📶 Same network</h4>
+                        <p>Your phone and TV must be on the same Wi-Fi network, with network remote control enabled on the TV.</p>
+                    </div>
+                    <div class="compat-item">
+                        <h4>📺 Supported TV</h4>
+                        <p>A Wi-Fi smart TV or streamer from a supported brand (Samsung, LG, Sony, TCL, Hisense and more).</p>
+                    </div>
+                    <div class="compat-item">
+                        <h4>📱 Platforms</h4>
+                        <p>iOS 15+ and Android. Free download, no account required.</p>
+                    </div>
+                    <div class="compat-item">
+                        <h4>🔐 Privacy</h4>
+                        <p>Control happens over your local network. No tracking of your viewing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section>
+        <div class="container">
+            <div class="section-eyebrow">FAQ</div>
+            <h2 class="section-title">Common questions</h2>
+            <div class="faq">
+                <div class="faq-item">
+                    <button class="faq-q">Which TV brands does SuperMote support?</button>
+                    <div class="faq-a">SuperMote works with many Wi-Fi smart TVs and streamers, including Samsung, LG, Sony BRAVIA, Google TV, TCL, Hisense, Philips, Xiaomi, NVIDIA SHIELD and Chromecast with Google TV. Compatibility can vary by model, region and software version.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q">My TV doesn't show up. What now?</button>
+                    <div class="faq-a">Make sure your phone and TV are on the same Wi-Fi network (not a guest network), that network remote control is enabled on the TV, that your TV allows pairing or device approval, and that the TV is powered on and connected.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q">Is SuperMote free?</button>
+                    <div class="faq-a">Yes — free to download on the App Store and Google Play, with no account required for core remote control.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q">I only have a Sony Bravia TV. Should I use SuperMote or SonLink?</button>
+                    <div class="faq-a">If every TV you own is a Sony Bravia, our dedicated <a href="../sonlink/index.html" style="color:#8c9eff;">SonLink</a> app is tuned just for Bravia. If you have a mix of brands, SuperMote covers them all in one place.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q">Can I control more than one TV?</button>
+                    <div class="faq-a">Yes. Save multiple TVs and switch between them in a couple of taps — handy for homes with TVs in different rooms.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to ditch the lost remote?</h2>
+            <p>Free on App Store and Google Play. Pair in under a minute.</p>
+            <div class="hero-buttons" style="justify-content: center;">
+                <a href="https://apps.apple.com/hk/app/superremote-tv-remote/id6743916971" class="btn btn-primary" target="_blank">Download on App Store</a>
+                <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.remotex.smarttvremote" class="btn btn-secondary" target="_blank">Get on Google Play</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="../../index.html">Back to Fireshark</a>
+            <a href="../sonlink/index.html">SonLink</a>
+            <a href="../../legal/terms-of-use.html">Terms of Use</a>
+            <a href="../../legal/privacy-policy.html">Privacy Policy</a>
+            <a href="mailto:hello@fireshark.tech">hello@fireshark.tech</a>
+        </div>
+        <p>© 2026 Fireshark Tech. All rights reserved. Not affiliated with any TV manufacturer.</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-q').forEach(q => {
+            q.addEventListener('click', () => { q.parentElement.classList.toggle('open'); });
+        });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.feature, .brand-card, .step, .compat-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
