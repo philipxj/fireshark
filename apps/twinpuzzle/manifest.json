@@ -1,11 +1,11 @@
 {
-    "name": "twin_puzzle",
-    "short_name": "twin_puzzle",
+    "name": "Twindle",
+    "short_name": "Twindle",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#07060F",
+    "theme_color": "#0E1230",
+    "description": "The daily twin-equation math puzzle. One sequence of operators, two equations, one target.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
