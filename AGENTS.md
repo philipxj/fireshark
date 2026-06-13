@@ -4,7 +4,7 @@ This is the canonical agent guidance file for this repository. It applies to Cod
 
 ## Project Overview
 
-Static portfolio website for **Fireshark Tech**, showcasing mobile applications (iOS and Android). Hosted on GitHub Pages with the custom domain `fireshark.tech` (configured via `CNAME`).
+Static portfolio website for **Fireshark Tech**, showcasing web and mobile applications. Hosted on GitHub Pages with the custom domain `fireshark.tech` (configured via `CNAME`).
 
 ## Project Structure
 
@@ -24,6 +24,7 @@ Apps currently featured on the portfolio main page (`index.html`):
 2. **SonLink: TV Remote** — Sony Bravia–only smart TV remote (has dedicated detail page at `apps/sonlink/`)
 3. **SuperMote: TV Remote Control** — Universal Wi-Fi remote covering Samsung, LG, Sony BRAVIA, Google TV, TCL, Hisense, Philips, Xiaomi, NVIDIA SHIELD, Chromecast
 4. **Pon Pon Math** — Educational math game for children (App Store only — Play Store link is intentionally commented out in the HTML)
+5. **Twindle** — Daily twin-equation math puzzle for the web. iOS and Android links are intentionally absent until the native apps ship.
 
 > **SonLink vs SuperMote:** intentionally separate products despite brand overlap. SonLink is the dedicated Bravia-only experience; SuperMote is the universal app. Do not propose merging or removing either.
 
