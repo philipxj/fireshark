@@ -13,12 +13,12 @@
     <meta property="og:url" content="https://fireshark.tech/apps/hk-weather-alerts/">
     <meta property="og:title" content="HK Weather Alerts - Hong Kong Weather Warning Browser Extension">
     <meta property="og:description" content="A compact browser extension for Hong Kong weather alerts, current weather, radar, lightning, and forecasts.">
-    <meta property="og:image" content="https://fireshark.tech/image/app_icon/hk_weather_alerts_icon.png">
+    <meta property="og:image" content="https://fireshark.tech/image/hk-weather-alerts/chrome-store-popup-zh-Hant-1280x800.png">
 
-    <meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="HK Weather Alerts">
     <meta name="twitter:description" content="Compact Hong Kong weather alerts for your browser.">
-    <meta name="twitter:image" content="https://fireshark.tech/image/app_icon/hk_weather_alerts_icon.png">
+    <meta name="twitter:image" content="https://fireshark.tech/image/hk-weather-alerts/chrome-store-popup-zh-Hant-1280x800.png">
 
     <link rel="icon" type="image/png" href="../../image/app_icon/hk_weather_alerts_icon.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
@@ -123,7 +123,7 @@
             margin: 0 auto;
             padding: 0 2rem;
             display: grid;
-            grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.88fr);
+            grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
             gap: 4rem;
             align-items: center;
         }
@@ -200,123 +200,24 @@
             max-width: 660px;
         }
 
-        .browser-preview {
+        .hero-screenshot {
             position: relative;
-            border-radius: 22px;
-            background: #f4f7fb;
-            color: #172033;
-            box-shadow: 0 26px 80px rgba(0, 0, 0, 0.38);
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.18);
+            margin: 0;
         }
-        .browser-bar {
-            height: 46px;
-            background: #dfe6ef;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0 1rem;
+        .hero-screenshot::before {
+            content: '';
+            position: absolute;
+            inset: 13% 10% 4%;
+            background: rgba(143, 199, 255, 0.32);
+            filter: blur(54px);
+            z-index: -1;
         }
-        .browser-dot {
-            width: 11px;
-            height: 11px;
-            border-radius: 50%;
-            background: #ef4444;
-        }
-        .browser-dot:nth-child(2) { background: #f59e0b; }
-        .browser-dot:nth-child(3) { background: #22c55e; }
-        .popup-preview {
-            margin: 1.2rem auto 1.4rem;
-            width: min(86%, 360px);
-            border-radius: 20px;
-            background: #ffffff;
-            box-shadow: 0 18px 40px rgba(23, 32, 51, 0.18);
-            border: 1px solid #e7edf5;
-            overflow: hidden;
-        }
-        .popup-header {
-            background: #2f5f98;
-            color: #ffffff;
-            padding: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 0.75rem;
-        }
-        .popup-title {
-            display: flex;
-            align-items: center;
-            gap: 0.7rem;
-            font-weight: 800;
-        }
-        .popup-title img {
-            width: 38px;
-            height: 38px;
-            border-radius: 9px;
-        }
-        .badge {
-            min-width: 38px;
-            height: 28px;
-            border-radius: 8px;
-            background: #d62828;
-            color: #ffffff;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 0.9rem;
-        }
-        .weather-now {
-            padding: 1.2rem;
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 1rem;
-            align-items: center;
-            border-bottom: 1px solid #edf1f6;
-        }
-        .temp {
-            font-size: 3rem;
-            line-height: 1;
-            font-weight: 800;
-            color: #172033;
-        }
-        .condition {
-            color: #556274;
-            font-size: 0.92rem;
-        }
-        .warning-strip {
-            margin: 0 1.2rem 1.1rem;
-            padding: 0.75rem 0.85rem;
-            border-radius: 12px;
-            background: #fff5d6;
-            color: #62420b;
-            font-weight: 700;
-            font-size: 0.9rem;
-        }
-        .mini-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            border-top: 1px solid #edf1f6;
-        }
-        .mini-item {
-            padding: 0.85rem 0.6rem;
-            text-align: center;
-            border-right: 1px solid #edf1f6;
-        }
-        .mini-item:last-child { border-right: 0; }
-        .mini-label {
+        .hero-screenshot img {
             display: block;
-            color: #758295;
-            font-size: 0.72rem;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-        .mini-value {
-            display: block;
-            color: #172033;
-            font-size: 0.96rem;
-            font-weight: 800;
-            margin-top: 0.2rem;
+            width: 100%;
+            height: auto;
+            border-radius: 18px;
+            box-shadow: 0 28px 82px rgba(0, 0, 0, 0.34);
         }
 
         section { padding: 5rem 0; }
@@ -488,8 +389,7 @@
             .hero-container,
             .container { padding: 0 1.2rem; }
             .hero h1 { font-size: 2.45rem; }
-            .browser-preview { border-radius: 16px; }
-            .popup-preview { width: calc(100% - 1.6rem); }
+            .hero-screenshot img { border-radius: 14px; }
             section { padding: 4rem 0; }
         }
     </style>
@@ -521,44 +421,14 @@
                     <p class="fine-print">Independent utility by Fireshark HK. Not affiliated with, authorized, endorsed by, or officially connected with the Hong Kong Observatory.</p>
                 </div>
 
-                <div class="browser-preview" aria-label="HK Weather Alerts popup preview">
-                    <div class="browser-bar">
-                        <span class="browser-dot"></span>
-                        <span class="browser-dot"></span>
-                        <span class="browser-dot"></span>
-                    </div>
-                    <div class="popup-preview">
-                        <div class="popup-header">
-                            <div class="popup-title">
-                                <img src="../../image/app_icon/hk_weather_alerts_icon.png" alt="">
-                                <span>HK Weather Alerts</span>
-                            </div>
-                            <span class="badge">W</span>
-                        </div>
-                        <div class="weather-now">
-                            <div class="temp">29&deg;</div>
-                            <div>
-                                <strong>Hong Kong Weather</strong>
-                                <p class="condition">Current weather, humidity, UV index, and forecast details.</p>
-                            </div>
-                        </div>
-                        <div class="warning-strip">Active weather warnings appear in the toolbar badge.</div>
-                        <div class="mini-grid">
-                            <div class="mini-item">
-                                <span class="mini-label">Radar</span>
-                                <span class="mini-value">Live</span>
-                            </div>
-                            <div class="mini-item">
-                                <span class="mini-label">Lightning</span>
-                                <span class="mini-value">Map</span>
-                            </div>
-                            <div class="mini-item">
-                                <span class="mini-label">Forecast</span>
-                                <span class="mini-value">9 days</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <figure class="hero-screenshot">
+                    <img
+                        src="../../image/hk-weather-alerts/chrome-store-popup-zh-Hant-1280x800.png"
+                        alt="HK Weather Alerts popup showing Hong Kong rainstorm warning, radar image, and seven-day forecast"
+                        width="1280"
+                        height="800"
+                    >
+                </figure>
             </div>
         </section>
 
