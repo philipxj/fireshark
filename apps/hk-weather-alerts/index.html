@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HK Weather Alerts - Hong Kong Weather Warning Browser Extension</title>
+    <meta name="description" content="HK Weather Alerts is an unofficial compact browser extension for Hong Kong weather warnings, current conditions, radar, lightning, and forecasts using Hong Kong Observatory Open Data.">
+    <meta name="keywords" content="HK Weather Alerts, Hong Kong weather extension, Hong Kong Observatory Open Data, HKO warnings, weather warning browser extension, Hong Kong weather radar">
+    <meta name="theme-color" content="#0b1220">
+    <link rel="canonical" href="https://fireshark.tech/apps/hk-weather-alerts/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fireshark.tech/apps/hk-weather-alerts/">
+    <meta property="og:title" content="HK Weather Alerts - Hong Kong Weather Warning Browser Extension">
+    <meta property="og:description" content="A compact browser extension for Hong Kong weather alerts, current weather, radar, lightning, and forecasts.">
+    <meta property="og:image" content="https://fireshark.tech/image/app_icon/hk_weather_alerts_icon.png">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="HK Weather Alerts">
+    <meta name="twitter:description" content="Compact Hong Kong weather alerts for your browser.">
+    <meta name="twitter:image" content="https://fireshark.tech/image/app_icon/hk_weather_alerts_icon.png">
+
+    <link rel="icon" type="image/png" href="../../image/app_icon/hk_weather_alerts_icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "HK Weather Alerts",
+      "operatingSystem": "Chrome, Edge, Chromium browsers",
+      "applicationCategory": "UtilitiesApplication",
+      "description": "Unofficial compact browser extension for Hong Kong weather warnings, current conditions, radar, lightning, and forecasts using Hong Kong Observatory Open Data.",
+      "image": "https://fireshark.tech/image/app_icon/hk_weather_alerts_icon.png",
+      "url": "https://fireshark.tech/apps/hk-weather-alerts/",
+      "author": { "@type": "Organization", "name": "Fireshark Tech", "url": "https://fireshark.tech/" },
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0b1220;
+            color: #f6f8fb;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        a { color: inherit; }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(11, 18, 32, 0.86);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 20;
+        }
+        .nav-container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+        .nav-back {
+            color: #a9b5c7;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .nav-back:hover { color: #8fc7ff; }
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        .nav-link {
+            color: #a9b5c7;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+        .nav-link:hover { color: #ffffff; }
+        .nav-cta {
+            padding: 0.55rem 1rem;
+            border-radius: 8px;
+            background: #f0b429;
+            color: #182033;
+            text-decoration: none;
+            font-size: 0.86rem;
+            font-weight: 800;
+            box-shadow: 0 10px 24px rgba(240, 180, 41, 0.24);
+        }
+
+        .hero {
+            position: relative;
+            padding: 9rem 0 5rem;
+            min-height: 92vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 18% 18%, rgba(47, 95, 152, 0.45), transparent 30%),
+                radial-gradient(circle at 78% 20%, rgba(240, 180, 41, 0.18), transparent 26%),
+                linear-gradient(180deg, rgba(11, 18, 32, 0), #0b1220 96%);
+            pointer-events: none;
+        }
+        .hero-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.88fr);
+            gap: 4rem;
+            align-items: center;
+        }
+        .hero-icon {
+            width: 82px;
+            height: 82px;
+            border-radius: 18px;
+            margin-bottom: 1.35rem;
+            box-shadow: 0 18px 36px rgba(0, 0, 0, 0.35);
+        }
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            color: #8fc7ff;
+            font-size: 0.78rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            padding: 0.3rem 0.75rem;
+            border: 1px solid rgba(143, 199, 255, 0.28);
+            border-radius: 999px;
+            background: rgba(143, 199, 255, 0.08);
+            margin-bottom: 1rem;
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.6rem);
+            line-height: 1.05;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            max-width: 760px;
+            margin-bottom: 1.25rem;
+        }
+        .hero h1 span { color: #f0b429; }
+        .lede {
+            color: #c2ccda;
+            font-size: 1.15rem;
+            font-weight: 300;
+            max-width: 650px;
+            margin-bottom: 2rem;
+        }
+        .hero-actions {
+            display: flex;
+            gap: 0.85rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.4rem;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            padding: 0.8rem 1.25rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 800;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+        .btn:hover { transform: translateY(-2px); }
+        .btn-primary {
+            background: #f0b429;
+            color: #172033;
+            box-shadow: 0 12px 28px rgba(240, 180, 41, 0.26);
+        }
+        .btn-secondary {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+        }
+        .btn-secondary:hover { border-color: rgba(143, 199, 255, 0.45); }
+        .fine-print {
+            color: #8d9aaa;
+            font-size: 0.9rem;
+            max-width: 660px;
+        }
+
+        .browser-preview {
+            position: relative;
+            border-radius: 22px;
+            background: #f4f7fb;
+            color: #172033;
+            box-shadow: 0 26px 80px rgba(0, 0, 0, 0.38);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        .browser-bar {
+            height: 46px;
+            background: #dfe6ef;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0 1rem;
+        }
+        .browser-dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background: #ef4444;
+        }
+        .browser-dot:nth-child(2) { background: #f59e0b; }
+        .browser-dot:nth-child(3) { background: #22c55e; }
+        .popup-preview {
+            margin: 1.2rem auto 1.4rem;
+            width: min(86%, 360px);
+            border-radius: 20px;
+            background: #ffffff;
+            box-shadow: 0 18px 40px rgba(23, 32, 51, 0.18);
+            border: 1px solid #e7edf5;
+            overflow: hidden;
+        }
+        .popup-header {
+            background: #2f5f98;
+            color: #ffffff;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }
+        .popup-title {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-weight: 800;
+        }
+        .popup-title img {
+            width: 38px;
+            height: 38px;
+            border-radius: 9px;
+        }
+        .badge {
+            min-width: 38px;
+            height: 28px;
+            border-radius: 8px;
+            background: #d62828;
+            color: #ffffff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.9rem;
+        }
+        .weather-now {
+            padding: 1.2rem;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1rem;
+            align-items: center;
+            border-bottom: 1px solid #edf1f6;
+        }
+        .temp {
+            font-size: 3rem;
+            line-height: 1;
+            font-weight: 800;
+            color: #172033;
+        }
+        .condition {
+            color: #556274;
+            font-size: 0.92rem;
+        }
+        .warning-strip {
+            margin: 0 1.2rem 1.1rem;
+            padding: 0.75rem 0.85rem;
+            border-radius: 12px;
+            background: #fff5d6;
+            color: #62420b;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        .mini-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border-top: 1px solid #edf1f6;
+        }
+        .mini-item {
+            padding: 0.85rem 0.6rem;
+            text-align: center;
+            border-right: 1px solid #edf1f6;
+        }
+        .mini-item:last-child { border-right: 0; }
+        .mini-label {
+            display: block;
+            color: #758295;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .mini-value {
+            display: block;
+            color: #172033;
+            font-size: 0.96rem;
+            font-weight: 800;
+            margin-top: 0.2rem;
+        }
+
+        section { padding: 5rem 0; }
+        .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .section-kicker {
+            color: #8fc7ff;
+            font-size: 0.78rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            text-align: center;
+            margin-bottom: 0.75rem;
+        }
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.15;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+        .section-copy {
+            color: #b7c2d2;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            font-weight: 300;
+            font-size: 1.05rem;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+        }
+        .feature {
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 1.55rem;
+        }
+        .feature-mark {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            background: rgba(143, 199, 255, 0.13);
+            color: #8fc7ff;
+            font-weight: 800;
+        }
+        .feature:nth-child(2) .feature-mark { background: rgba(240, 180, 41, 0.16); color: #f0b429; }
+        .feature:nth-child(3) .feature-mark { background: rgba(214, 40, 40, 0.15); color: #ff7a7a; }
+        .feature h3 {
+            font-size: 1.08rem;
+            margin-bottom: 0.5rem;
+        }
+        .feature p {
+            color: #a9b5c7;
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+        .source-band {
+            background: rgba(255, 255, 255, 0.035);
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        }
+        .source-layout {
+            display: grid;
+            grid-template-columns: 0.85fr 1.15fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        .source-layout h2 {
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+        .source-layout p,
+        .source-list {
+            color: #b7c2d2;
+            font-weight: 300;
+        }
+        .source-list {
+            list-style: none;
+            display: grid;
+            gap: 0.9rem;
+        }
+        .source-list li {
+            padding: 1rem 1.1rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .source-list a {
+            color: #8fc7ff;
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .source-list a:hover { text-decoration: underline; }
+        .support-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+        }
+        .support-item {
+            padding: 1.5rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .support-item h3 {
+            font-size: 1.05rem;
+            margin-bottom: 0.5rem;
+        }
+        .support-item p {
+            color: #a9b5c7;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+        .text-link {
+            color: #8fc7ff;
+            text-decoration: none;
+            font-weight: 800;
+        }
+        .text-link:hover { text-decoration: underline; }
+        footer {
+            padding: 2.5rem 0;
+            background: #070d17;
+            color: #8290a3;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
+            font-size: 0.9rem;
+        }
+        .footer-links {
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .footer-links a {
+            color: #a9b5c7;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .footer-links a:hover { color: #8fc7ff; }
+
+        @media (max-width: 900px) {
+            .hero { min-height: auto; padding-top: 8rem; }
+            .hero-container,
+            .source-layout,
+            .support-panel {
+                grid-template-columns: 1fr;
+            }
+            .hero-container { gap: 3rem; }
+            .feature-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 620px) {
+            .nav-container { padding: 0.85rem 1rem; }
+            .nav-links { gap: 0.65rem; }
+            .nav-link { display: none; }
+            .hero-container,
+            .container { padding: 0 1.2rem; }
+            .hero h1 { font-size: 2.45rem; }
+            .browser-preview { border-radius: 16px; }
+            .popup-preview { width: calc(100% - 1.6rem); }
+            section { padding: 4rem 0; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-back">&larr; Fireshark Tech</a>
+            <div class="nav-links">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#data" class="nav-link">Data Sources</a>
+                <a href="#support" class="nav-cta">Support</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="hero-container">
+                <div>
+                    <img src="../../image/app_icon/hk_weather_alerts_icon.png" alt="HK Weather Alerts icon" class="hero-icon">
+                    <div class="eyebrow">Browser extension</div>
+                    <h1>HK Weather Alerts for your <span>browser</span>.</h1>
+                    <p class="lede">A compact Hong Kong weather utility for current conditions, active warning signals, radar images, lightning location, and short-range forecasts.</p>
+                    <div class="hero-actions">
+                        <a href="#support" class="btn btn-primary">Contact Support</a>
+                        <a href="../../legal/hk-weather-alerts-privacy-policy.html" class="btn btn-secondary">Privacy Policy</a>
+                    </div>
+                    <p class="fine-print">Independent utility by Fireshark HK. Not affiliated with, authorized, endorsed by, or officially connected with the Hong Kong Observatory.</p>
+                </div>
+
+                <div class="browser-preview" aria-label="HK Weather Alerts popup preview">
+                    <div class="browser-bar">
+                        <span class="browser-dot"></span>
+                        <span class="browser-dot"></span>
+                        <span class="browser-dot"></span>
+                    </div>
+                    <div class="popup-preview">
+                        <div class="popup-header">
+                            <div class="popup-title">
+                                <img src="../../image/app_icon/hk_weather_alerts_icon.png" alt="">
+                                <span>HK Weather Alerts</span>
+                            </div>
+                            <span class="badge">W</span>
+                        </div>
+                        <div class="weather-now">
+                            <div class="temp">29&deg;</div>
+                            <div>
+                                <strong>Hong Kong Weather</strong>
+                                <p class="condition">Current weather, humidity, UV index, and forecast details.</p>
+                            </div>
+                        </div>
+                        <div class="warning-strip">Active weather warnings appear in the toolbar badge.</div>
+                        <div class="mini-grid">
+                            <div class="mini-item">
+                                <span class="mini-label">Radar</span>
+                                <span class="mini-value">Live</span>
+                            </div>
+                            <div class="mini-item">
+                                <span class="mini-label">Lightning</span>
+                                <span class="mini-value">Map</span>
+                            </div>
+                            <div class="mini-item">
+                                <span class="mini-label">Forecast</span>
+                                <span class="mini-value">9 days</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <div class="section-kicker">Features</div>
+                <h2 class="section-title">Weather information without opening a full website.</h2>
+                <p class="section-copy">HK Weather Alerts keeps essential Hong Kong weather information close to your browser toolbar.</p>
+
+                <div class="feature-grid">
+                    <article class="feature">
+                        <div class="feature-mark">01</div>
+                        <h3>Warning badge</h3>
+                        <p>Show active weather warnings or current temperature on the browser action badge, with notification options for warning updates.</p>
+                    </article>
+                    <article class="feature">
+                        <div class="feature-mark">02</div>
+                        <h3>Weather at a glance</h3>
+                        <p>View current weather, special weather tips, forecast information, and compact daily outlooks in one popup.</p>
+                    </article>
+                    <article class="feature">
+                        <div class="feature-mark">03</div>
+                        <h3>Radar and lightning</h3>
+                        <p>Open radar imagery, lightning location, and related public weather resources from Hong Kong Observatory data sources.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="data" class="source-band">
+            <div class="container source-layout">
+                <div>
+                    <div class="section-kicker" style="text-align: left;">Data Sources</div>
+                    <h2>Powered by public Hong Kong weather data.</h2>
+                    <p>Weather observations, forecasts, warnings, radar images, lightning information, and related resources are fetched from public data sources at runtime.</p>
+                </div>
+                <ul class="source-list">
+                    <li><a href="https://data.weather.gov.hk/" target="_blank" rel="noopener">Hong Kong Observatory Open Data</a></li>
+                    <li><a href="https://www.hko.gov.hk/" target="_blank" rel="noopener">Hong Kong Observatory website resources</a></li>
+                    <li><a href="https://data.gov.hk/en/terms-and-conditions" target="_blank" rel="noopener">DATA.GOV.HK open data terms</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="support">
+            <div class="container">
+                <div class="section-kicker">Support</div>
+                <h2 class="section-title">Help, privacy, and contact.</h2>
+                <p class="section-copy">For support questions, privacy details, or extension feedback, use the links below.</p>
+
+                <div class="support-panel">
+                    <article class="support-item">
+                        <h3>Contact Fireshark HK</h3>
+                        <p>Send support requests, bug reports, or feedback about HK Weather Alerts.</p>
+                        <a href="mailto:hello@fireshark.tech" class="text-link">hello@fireshark.tech</a>
+                    </article>
+                    <article class="support-item">
+                        <h3>Privacy Policy</h3>
+                        <p>HK Weather Alerts does not collect, sell, share, or transmit personal user data to Fireshark HK or any third party.</p>
+                        <a href="../../legal/hk-weather-alerts-privacy-policy.html" class="text-link">Read Privacy Policy</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="../../index.html">Fireshark Tech</a>
+            <a href="../../legal/hk-weather-alerts-privacy-policy.html">Privacy Policy</a>
+            <a href="mailto:hello@fireshark.tech">Contact</a>
+        </div>
+        <p>&copy; 2026 Fireshark Tech. All rights reserved.</p>
+    </footer>
+</body>
+</html>
