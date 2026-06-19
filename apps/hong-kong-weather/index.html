@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hong Kong Weather - 香港天氣預報瀏覽器擴充功能</title>
+    <meta name="description" content="Hong Kong Weather 是一個非官方香港天氣瀏覽器擴充功能，使用香港天文台開放數據顯示天氣警告、即時天氣、雷達圖、閃電位置及天氣預報。">
+    <meta name="keywords" content="Hong Kong Weather, 香港天氣擴充功能, 香港天文台開放數據, 天氣警告, 瀏覽器擴充功能, 香港天氣雷達">
+    <meta name="theme-color" content="#0b1220">
+    <link rel="canonical" href="https://fireshark.tech/apps/hong-kong-weather/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fireshark.tech/apps/hong-kong-weather/">
+    <meta property="og:title" content="Hong Kong Weather - 香港天氣預報瀏覽器擴充功能">
+    <meta property="og:description" content="簡潔的香港天氣瀏覽器擴充功能，可查看天氣警告、即時天氣、雷達圖、閃電位置及預報。">
+    <meta property="og:image" content="https://fireshark.tech/image/hong-kong-weather/chrome-store-popup-zh-Hant-1280x800.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hong Kong Weather">
+    <meta name="twitter:description" content="瀏覽器上的香港天氣提示工具。">
+    <meta name="twitter:image" content="https://fireshark.tech/image/hong-kong-weather/chrome-store-popup-zh-Hant-1280x800.png">
+
+    <link rel="icon" type="image/png" href="../../image/app_icon/hong_kong_weather_icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Hong Kong Weather",
+      "operatingSystem": "Chrome, Edge, Chromium browsers",
+      "applicationCategory": "UtilitiesApplication",
+      "description": "使用香港天文台開放數據的非官方香港天氣瀏覽器擴充功能，可查看天氣警告、即時天氣、雷達圖、閃電位置及預報。",
+      "image": "https://fireshark.tech/image/app_icon/hong_kong_weather_icon.png",
+      "url": "https://fireshark.tech/apps/hong-kong-weather/",
+      "downloadUrl": "https://chromewebstore.google.com/detail/%E9%A6%99%E6%B8%AF%E5%A4%A9%E6%B0%A3%E8%AD%A6%E5%A0%B1/chmlbbhplbepjboepkcngfnmbellhfge",
+      "author": { "@type": "Organization", "name": "Fireshark Tech", "url": "https://fireshark.tech/" },
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0b1220;
+            color: #f6f8fb;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        a { color: inherit; }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(11, 18, 32, 0.86);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 20;
+        }
+        .nav-container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+        .nav-back {
+            color: #a9b5c7;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .nav-back:hover { color: #8fc7ff; }
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        .nav-link {
+            color: #a9b5c7;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+        .nav-link:hover { color: #ffffff; }
+        .language-switch {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.22rem;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .lang-btn {
+            min-width: 44px;
+            min-height: 34px;
+            padding: 0.35rem 0.55rem;
+            border: 0;
+            border-radius: 8px;
+            background: transparent;
+            color: #a9b5c7;
+            cursor: pointer;
+            font: inherit;
+            font-size: 0.82rem;
+            font-weight: 800;
+        }
+        .lang-btn[aria-pressed="true"] {
+            background: #ffffff;
+            color: #172033;
+        }
+        .lang-btn:focus-visible {
+            outline: 2px solid #f0b429;
+            outline-offset: 2px;
+        }
+        .nav-cta {
+            padding: 0.55rem 1rem;
+            border-radius: 8px;
+            background: #f0b429;
+            color: #182033;
+            text-decoration: none;
+            font-size: 0.86rem;
+            font-weight: 800;
+            box-shadow: 0 10px 24px rgba(240, 180, 41, 0.24);
+        }
+
+        .hero {
+            position: relative;
+            padding: 9rem 0 5rem;
+            min-height: 92vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 18% 18%, rgba(47, 95, 152, 0.45), transparent 30%),
+                radial-gradient(circle at 78% 20%, rgba(240, 180, 41, 0.18), transparent 26%),
+                linear-gradient(180deg, rgba(11, 18, 32, 0), #0b1220 96%);
+            pointer-events: none;
+        }
+        .hero-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
+            gap: 4rem;
+            align-items: center;
+        }
+        .hero-icon {
+            width: 82px;
+            height: 82px;
+            border-radius: 18px;
+            margin-bottom: 1.35rem;
+            box-shadow: 0 18px 36px rgba(0, 0, 0, 0.35);
+        }
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            color: #8fc7ff;
+            font-size: 0.78rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            padding: 0.3rem 0.75rem;
+            border: 1px solid rgba(143, 199, 255, 0.28);
+            border-radius: 999px;
+            background: rgba(143, 199, 255, 0.08);
+            margin-bottom: 1rem;
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.6rem);
+            line-height: 1.05;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            max-width: 760px;
+            margin-bottom: 1.25rem;
+        }
+        .hero h1 span { color: #f0b429; }
+        .lede {
+            color: #c2ccda;
+            font-size: 1.15rem;
+            font-weight: 300;
+            max-width: 650px;
+            margin-bottom: 2rem;
+        }
+        .hero-actions {
+            display: flex;
+            gap: 0.85rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.4rem;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            padding: 0.8rem 1.25rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 800;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+        .btn:hover { transform: translateY(-2px); }
+        .btn-primary {
+            background: #f0b429;
+            color: #172033;
+            box-shadow: 0 12px 28px rgba(240, 180, 41, 0.26);
+        }
+        .btn-secondary {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+        }
+        .btn-secondary:hover { border-color: rgba(143, 199, 255, 0.45); }
+        .fine-print {
+            color: #8d9aaa;
+            font-size: 0.9rem;
+            max-width: 660px;
+        }
+
+        .hero-screenshot {
+            position: relative;
+            margin: 0;
+        }
+        .hero-screenshot::before {
+            content: '';
+            position: absolute;
+            inset: 13% 10% 4%;
+            background: rgba(143, 199, 255, 0.32);
+            filter: blur(54px);
+            z-index: -1;
+        }
+        .hero-screenshot img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 18px;
+            box-shadow: 0 28px 82px rgba(0, 0, 0, 0.34);
+        }
+
+        section { padding: 5rem 0; }
+        .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .section-kicker {
+            color: #8fc7ff;
+            font-size: 0.78rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            text-align: center;
+            margin-bottom: 0.75rem;
+        }
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.15;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+        .section-copy {
+            color: #b7c2d2;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            font-weight: 300;
+            font-size: 1.05rem;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+        }
+        .feature {
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 1.55rem;
+        }
+        .feature-mark {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            background: rgba(143, 199, 255, 0.13);
+            color: #8fc7ff;
+            font-weight: 800;
+        }
+        .feature:nth-child(2) .feature-mark { background: rgba(240, 180, 41, 0.16); color: #f0b429; }
+        .feature:nth-child(3) .feature-mark { background: rgba(214, 40, 40, 0.15); color: #ff7a7a; }
+        .feature h3 {
+            font-size: 1.08rem;
+            margin-bottom: 0.5rem;
+        }
+        .feature p {
+            color: #a9b5c7;
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+        .source-band {
+            background: rgba(255, 255, 255, 0.035);
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        }
+        .source-layout {
+            display: grid;
+            grid-template-columns: 0.85fr 1.15fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        .source-layout h2 {
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+        .source-layout p,
+        .source-list {
+            color: #b7c2d2;
+            font-weight: 300;
+        }
+        .source-list {
+            list-style: none;
+            display: grid;
+            gap: 0.9rem;
+        }
+        .source-list li {
+            padding: 1rem 1.1rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .source-list a {
+            color: #8fc7ff;
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .source-list a:hover { text-decoration: underline; }
+        .support-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+        }
+        .support-item {
+            padding: 1.5rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .support-item h3 {
+            font-size: 1.05rem;
+            margin-bottom: 0.5rem;
+        }
+        .support-item p {
+            color: #a9b5c7;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+        .text-link {
+            color: #8fc7ff;
+            text-decoration: none;
+            font-weight: 800;
+        }
+        .text-link:hover { text-decoration: underline; }
+        footer {
+            padding: 2.5rem 0;
+            background: #070d17;
+            color: #8290a3;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
+            font-size: 0.9rem;
+        }
+        .footer-links {
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .footer-links a {
+            color: #a9b5c7;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .footer-links a:hover { color: #8fc7ff; }
+
+        @media (max-width: 900px) {
+            .hero { min-height: auto; padding-top: 8rem; }
+            .hero-container,
+            .source-layout,
+            .support-panel {
+                grid-template-columns: 1fr;
+            }
+            .hero-container { gap: 3rem; }
+            .feature-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 620px) {
+            .nav-container { padding: 0.85rem 1rem; }
+            .nav-links { gap: 0.65rem; }
+            .nav-link { display: none; }
+            .nav-cta { padding: 0.5rem 0.78rem; }
+            .lang-btn {
+                min-width: 38px;
+                padding: 0.32rem 0.45rem;
+            }
+            .hero-container,
+            .container { padding: 0 1.2rem; }
+            .hero h1 { font-size: 2.45rem; }
+            .hero-screenshot img { border-radius: 14px; }
+            section { padding: 4rem 0; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-back" data-i18n="navBack">&larr; Fireshark Tech</a>
+            <div class="nav-links">
+                <a href="#features" class="nav-link" data-i18n="navFeatures">功能</a>
+                <a href="#data" class="nav-link" data-i18n="navData">資料來源</a>
+                <div class="language-switch" aria-label="Language">
+                    <button type="button" class="lang-btn" data-lang-option="zh-Hant" aria-pressed="true">中文</button>
+                    <button type="button" class="lang-btn" data-lang-option="en" aria-pressed="false">EN</button>
+                </div>
+                <a href="#support" class="nav-cta" data-i18n="navSupport">支援</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="hero-container">
+                <div>
+                    <img src="../../image/app_icon/hong_kong_weather_icon.png" alt="Hong Kong Weather 圖示" class="hero-icon" data-i18n-alt="heroIconAlt">
+                    <div class="eyebrow" data-i18n="eyebrow">瀏覽器擴充功能</div>
+                    <h1 data-i18n-html="heroTitle">香港天氣預報，<span>一按即睇</span>。</h1>
+                    <p class="lede" data-i18n="heroLede">Hong Kong Weather 將即時天氣、天氣警告、雷達圖、閃電位置及短期預報放到你的瀏覽器工具列。</p>
+                    <div class="hero-actions">
+                        <a href="https://chromewebstore.google.com/detail/%E9%A6%99%E6%B8%AF%E5%A4%A9%E6%B0%A3%E8%AD%A6%E5%A0%B1/chmlbbhplbepjboepkcngfnmbellhfge" class="btn btn-primary" target="_blank" rel="noopener" data-i18n="chromeWebStore">Chrome Web Store</a>
+                        <a href="https://microsoftedge.microsoft.com/addons/detail/%E9%A6%99%E6%B8%AF%E5%A4%A9%E6%B0%A3%E8%AD%A6%E5%A0%B1/koemdfkhpkadjclicmmjoaglaapcdlco" class="btn btn-secondary" target="_blank" rel="noopener" data-i18n="edgeAddons">Edge Add-ons</a>
+                        <a href="#support" class="btn btn-secondary" data-i18n="contactSupport">聯絡支援</a>
+                        <a href="../../legal/hk-weather-alerts-privacy-policy.html" class="btn btn-secondary" data-i18n="privacyPolicy">私隱政策</a>
+                    </div>
+                    <p class="fine-print" data-i18n="disclaimer">由 Fireshark HK 開發的獨立工具，並非香港天文台官方產品，亦未獲香港天文台授權、認可或背書。</p>
+                </div>
+
+                <figure class="hero-screenshot">
+                    <img
+                        src="../../image/hong-kong-weather/chrome-store-popup-zh-Hant-1280x800.png"
+                        alt="Hong Kong Weather 彈出視窗，顯示香港暴雨警告、雷達圖及七天天氣預報"
+                        width="1280"
+                        height="800"
+                        data-i18n-alt="heroScreenshotAlt"
+                    >
+                </figure>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <div class="section-kicker" data-i18n="featuresKicker">功能</div>
+                <h2 class="section-title" data-i18n="featuresTitle">不用打開完整網站，也可快速查看天氣資訊。</h2>
+                <p class="section-copy" data-i18n="featuresCopy">Hong Kong Weather 將香港常用天氣資訊集中在瀏覽器工具列，方便你隨時查看。</p>
+
+                <div class="feature-grid">
+                    <article class="feature">
+                        <div class="feature-mark">01</div>
+                        <h3 data-i18n="featureOneTitle">警告徽章</h3>
+                        <p data-i18n="featureOneCopy">在瀏覽器工具列徽章顯示生效中的天氣警告或即時氣溫，並可設定天氣警告更新通知。</p>
+                    </article>
+                    <article class="feature">
+                        <div class="feature-mark">02</div>
+                        <h3 data-i18n="featureTwoTitle">天氣一眼睇晒</h3>
+                        <p data-i18n="featureTwoCopy">在同一個彈出視窗查看現時天氣、特別天氣提示、預報資料及精簡每日展望。</p>
+                    </article>
+                    <article class="feature">
+                        <div class="feature-mark">03</div>
+                        <h3 data-i18n="featureThreeTitle">雷達及閃電位置</h3>
+                        <p data-i18n="featureThreeCopy">查看雷達圖、閃電位置及其他來自香港天文台資料來源的公開天氣資源。</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="data" class="source-band">
+            <div class="container source-layout">
+                <div>
+                    <div class="section-kicker" style="text-align: left;" data-i18n="dataKicker">資料來源</div>
+                    <h2 data-i18n="dataTitle">使用公開香港天氣數據。</h2>
+                    <p data-i18n="dataCopy">天氣觀測、預報、警告、雷達圖、閃電資訊及相關資源會在使用時從公開資料來源讀取。</p>
+                </div>
+                <ul class="source-list">
+                    <li><a href="https://data.weather.gov.hk/" target="_blank" rel="noopener" data-i18n="sourceOne">香港天文台開放數據</a></li>
+                    <li><a href="https://data.gov.hk/en/terms-and-conditions" target="_blank" rel="noopener" data-i18n="sourceThree">DATA.GOV.HK 開放數據條款</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="support">
+            <div class="container">
+                <div class="section-kicker" data-i18n="supportKicker">支援</div>
+                <h2 class="section-title" data-i18n="supportTitle">協助、私隱及聯絡。</h2>
+                <p class="section-copy" data-i18n="supportCopy">如有支援問題、私隱查詢或擴充功能意見，可使用以下連結聯絡我們。</p>
+
+                <div class="support-panel">
+                    <article class="support-item">
+                        <h3 data-i18n="contactTitle">聯絡 Fireshark HK</h3>
+                        <p data-i18n="contactCopy">提交 Hong Kong Weather 的支援請求、錯誤回報或使用意見。</p>
+                        <a href="mailto:hello@fireshark.tech" class="text-link">hello@fireshark.tech</a>
+                    </article>
+                    <article class="support-item">
+                        <h3 data-i18n="privacyTitle">私隱政策</h3>
+                        <p data-i18n="privacyCopy">Hong Kong Weather 不會收集、出售、分享或傳送個人用戶資料予 Fireshark HK 或任何第三方。</p>
+                        <a href="../../legal/hk-weather-alerts-privacy-policy.html" class="text-link" data-i18n="readPrivacy">閱讀私隱政策</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="../../index.html">Fireshark Tech</a>
+            <a href="../../legal/hk-weather-alerts-privacy-policy.html" data-i18n="privacyPolicy">私隱政策</a>
+            <a href="mailto:hello@fireshark.tech" data-i18n="footerContact">聯絡我們</a>
+        </div>
+        <p data-i18n="copyright">&copy; 2026 Fireshark Tech. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const translations = {
+            "zh-Hant": {
+                pageTitle: "Hong Kong Weather - 香港天氣預報瀏覽器擴充功能",
+                metaDescription: "Hong Kong Weather 是一個非官方香港天氣瀏覽器擴充功能，使用香港天文台開放數據顯示天氣警告、即時天氣、雷達圖、閃電位置及天氣預報。",
+                ogDescription: "簡潔的香港天氣瀏覽器擴充功能，可查看天氣警告、即時天氣、雷達圖、閃電位置及預報。",
+                twitterDescription: "瀏覽器上的香港天氣提示工具。",
+                navBack: "\u2190 Fireshark Tech",
+                navFeatures: "功能",
+                navData: "資料來源",
+                navSupport: "支援",
+                heroIconAlt: "Hong Kong Weather 圖示",
+                eyebrow: "瀏覽器擴充功能",
+                heroTitle: "香港天氣預報，<span>一按即睇</span>。",
+                heroLede: "Hong Kong Weather 將即時天氣、天氣警告、雷達圖、閃電位置及短期預報放到你的瀏覽器工具列。",
+                chromeWebStore: "Chrome Web Store",
+                edgeAddons: "Edge Add-ons",
+                contactSupport: "聯絡支援",
+                privacyPolicy: "私隱政策",
+                disclaimer: "由 Fireshark HK 開發的獨立工具，並非香港天文台官方產品，亦未獲香港天文台授權、認可或背書。",
+                heroScreenshotAlt: "Hong Kong Weather 彈出視窗，顯示香港暴雨警告、雷達圖及七天天氣預報",
+                featuresKicker: "功能",
+                featuresTitle: "不用打開完整網站，也可快速查看天氣資訊。",
+                featuresCopy: "Hong Kong Weather 將香港常用天氣資訊集中在瀏覽器工具列，方便你隨時查看。",
+                featureOneTitle: "警告徽章",
+                featureOneCopy: "在瀏覽器工具列徽章顯示生效中的天氣警告或即時氣溫，並可設定天氣警告更新通知。",
+                featureTwoTitle: "天氣一眼睇晒",
+                featureTwoCopy: "在同一個彈出視窗查看現時天氣、特別天氣提示、預報資料及精簡每日展望。",
+                featureThreeTitle: "雷達及閃電位置",
+                featureThreeCopy: "查看雷達圖、閃電位置及其他來自香港天文台資料來源的公開天氣資源。",
+                dataKicker: "資料來源",
+                dataTitle: "使用公開香港天氣數據。",
+                dataCopy: "天氣觀測、預報、警告、雷達圖、閃電資訊及相關資源會在使用時從公開資料來源讀取。",
+                sourceOne: "香港天文台開放數據",
+                sourceThree: "DATA.GOV.HK 開放數據條款",
+                supportKicker: "支援",
+                supportTitle: "協助、私隱及聯絡。",
+                supportCopy: "如有支援問題、私隱查詢或擴充功能意見，可使用以下連結聯絡我們。",
+                contactTitle: "聯絡 Fireshark HK",
+                contactCopy: "提交 Hong Kong Weather 的支援請求、錯誤回報或使用意見。",
+                privacyTitle: "私隱政策",
+                privacyCopy: "Hong Kong Weather 不會收集、出售、分享或傳送個人用戶資料予 Fireshark HK 或任何第三方。",
+                readPrivacy: "閱讀私隱政策",
+                footerContact: "聯絡我們",
+                copyright: "\u00a9 2026 Fireshark Tech. All rights reserved."
+            },
+            en: {
+                pageTitle: "Hong Kong Weather - Hong Kong Weather Browser Extension",
+                metaDescription: "Hong Kong Weather is an unofficial compact browser extension for Hong Kong weather, current conditions, radar, lightning, and forecasts using Hong Kong Observatory Open Data.",
+                ogDescription: "A compact browser extension for Hong Kong weather alerts, current weather, radar, lightning, and forecasts.",
+                twitterDescription: "Compact Hong Kong weather alerts for your browser.",
+                navBack: "\u2190 Fireshark Tech",
+                navFeatures: "Features",
+                navData: "Data Sources",
+                navSupport: "Support",
+                heroIconAlt: "Hong Kong Weather icon",
+                eyebrow: "Browser extension",
+                heroTitle: "Hong Kong Weather for your <span>browser</span>.",
+                heroLede: "A compact Hong Kong weather utility for current conditions, active warning signals, radar images, lightning location, and short-range forecasts.",
+                chromeWebStore: "Chrome Web Store",
+                edgeAddons: "Edge Add-ons",
+                contactSupport: "Contact Support",
+                privacyPolicy: "Privacy Policy",
+                disclaimer: "Independent utility by Fireshark HK. Not affiliated with, authorized, endorsed by, or officially connected with the Hong Kong Observatory.",
+                heroScreenshotAlt: "Hong Kong Weather popup showing Hong Kong rainstorm warning, radar image, and seven-day forecast",
+                featuresKicker: "Features",
+                featuresTitle: "Weather information without opening a full website.",
+                featuresCopy: "Hong Kong Weather keeps essential Hong Kong weather information close to your browser toolbar.",
+                featureOneTitle: "Warning badge",
+                featureOneCopy: "Show active weather or current temperature on the browser action badge, with notification options for warning updates.",
+                featureTwoTitle: "Weather at a glance",
+                featureTwoCopy: "View current weather, special weather tips, forecast information, and compact daily outlooks in one popup.",
+                featureThreeTitle: "Radar and lightning",
+                featureThreeCopy: "Open radar imagery, lightning location, and related public weather resources from Hong Kong Observatory data sources.",
+                dataKicker: "Data Sources",
+                dataTitle: "Powered by public Hong Kong weather data.",
+                dataCopy: "Weather observations, forecasts, warnings, radar images, lightning information, and related resources are fetched from public data sources at runtime.",
+                sourceOne: "Hong Kong Observatory Open Data",
+                sourceThree: "DATA.GOV.HK open data terms",
+                supportKicker: "Support",
+                supportTitle: "Help, privacy, and contact.",
+                supportCopy: "For support questions, privacy details, or extension feedback, use the links below.",
+                contactTitle: "Contact Fireshark HK",
+                contactCopy: "Send support requests, bug reports, or feedback about Hong Kong Weather.",
+                privacyTitle: "Privacy Policy",
+                privacyCopy: "Hong Kong Weather does not collect, sell, share, or transmit personal user data to Fireshark HK or any third party.",
+                readPrivacy: "Read Privacy Policy",
+                footerContact: "Contact",
+                copyright: "\u00a9 2026 Fireshark Tech. All rights reserved."
+            }
+        };
+
+        const metaSelectors = {
+            description: 'meta[name="description"]',
+            ogTitle: 'meta[property="og:title"]',
+            ogDescription: 'meta[property="og:description"]',
+            twitterTitle: 'meta[name="twitter:title"]',
+            twitterDescription: 'meta[name="twitter:description"]'
+        };
+
+        function setMeta(selector, value) {
+            const element = document.querySelector(selector);
+            if (element) element.setAttribute("content", value);
+        }
+
+        function applyLanguage(language) {
+            const activeLanguage = Object.prototype.hasOwnProperty.call(translations, language) ? language : "zh-Hant";
+            const copy = translations[activeLanguage];
+            document.documentElement.lang = activeLanguage;
+            document.title = copy.pageTitle;
+            setMeta(metaSelectors.description, copy.metaDescription);
+            setMeta(metaSelectors.ogTitle, copy.pageTitle);
+            setMeta(metaSelectors.ogDescription, copy.ogDescription);
+            setMeta(metaSelectors.twitterTitle, "Hong Kong Weather");
+            setMeta(metaSelectors.twitterDescription, copy.twitterDescription);
+
+            document.querySelectorAll("[data-i18n]").forEach((element) => {
+                const key = element.getAttribute("data-i18n");
+                if (key && key in copy) element.textContent = copy[key];
+            });
+
+            document.querySelectorAll("[data-i18n-html]").forEach((element) => {
+                const key = element.getAttribute("data-i18n-html");
+                if (key && key in copy) element.innerHTML = copy[key];
+            });
+
+            document.querySelectorAll("[data-i18n-alt]").forEach((element) => {
+                const key = element.getAttribute("data-i18n-alt");
+                if (key && key in copy) element.setAttribute("alt", copy[key]);
+            });
+
+            document.querySelectorAll("[data-lang-option]").forEach((button) => {
+                button.setAttribute("aria-pressed", String(button.getAttribute("data-lang-option") === activeLanguage));
+            });
+
+            try {
+                localStorage.setItem("hong-kong-weather-language", activeLanguage);
+            } catch (error) {
+                // Ignore storage errors in privacy-restricted browsers.
+            }
+        }
+
+        function preferredLanguage() {
+            try {
+                const saved = localStorage.getItem("hong-kong-weather-language");
+                if (Object.prototype.hasOwnProperty.call(translations, saved)) return saved;
+            } catch (error) {
+                // Continue with browser language detection.
+            }
+
+            const browserLanguage = (navigator.languages && navigator.languages[0]) || navigator.language || "";
+            return browserLanguage.toLowerCase().startsWith("zh") ? "zh-Hant" : "en";
+        }
+
+        document.querySelectorAll("[data-lang-option]").forEach((button) => {
+            button.addEventListener("click", () => applyLanguage(button.getAttribute("data-lang-option")));
+        });
+
+        applyLanguage(preferredLanguage());
+    </script>
+</body>
+</html>
