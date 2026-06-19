@@ -26,6 +26,11 @@
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://fireshark.tech/legal/hk-weather-alerts-privacy-policy.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
     <loc>https://fireshark.tech/legal/terms-of-use.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
