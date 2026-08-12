@@ -21,12 +21,14 @@ Static portfolio website for **Fireshark Tech**, showcasing web and mobile appli
 Apps currently featured on the portfolio main page (`index.html`):
 
 1. **Goodbus** — Hong Kong bus arrival time app
-2. **SonLink: TV Remote** — Sony Bravia–only smart TV remote (has dedicated detail page at `apps/sonlink/`)
-3. **SuperMote: TV Remote Control** — Universal Wi-Fi remote covering Samsung, LG, Sony BRAVIA, Google TV, TCL, Hisense, Philips, Xiaomi, NVIDIA SHIELD, Chromecast
+2. **SonLink: Wi-Fi TV Remote** — Focused remote for compatible TVs (has dedicated detail page at `apps/sonlink/`)
+3. **SuperMote: TV Remote Control** — Universal Wi-Fi remote for multiple compatible TV platforms and streaming devices
 4. **Pon Pon Math** — Educational math game for children (App Store only — Play Store link is intentionally commented out in the HTML)
 5. **Twindle** — Daily twin-equation math puzzle for web, iOS, and Android.
 
-> **SonLink vs SuperMote:** intentionally separate products despite brand overlap. SonLink is the dedicated Bravia-only experience; SuperMote is the universal app. Do not propose merging or removing either.
+> **SonLink vs SuperMote:** intentionally separate products. SonLink is the focused TV-remote experience; SuperMote supports multiple compatible TV platforms. Do not propose merging or removing either.
+
+> **Public SonLink wording:** keep SonLink website copy, SEO, FAQ, structured data, and support content manufacturer-neutral, and do not use Sony or BRAVIA as promotional copy on shared pages. Use “TV”, “compatible TV”, or “supported TV platform”. Immutable package IDs, historical store URL slugs, protocol identifiers, and asset filenames may retain legacy brand tokens but must not be presented as marketing claims.
 
 > Note: a previous "Remote for WebOS TV" card existed but was removed from the lineup.
 
@@ -65,7 +67,7 @@ App Store screenshots come pre-framed with brand background and locale-specific 
 
 - Pure static site — no build process, no package.json, no test suite
 - Custom inline CSS in each HTML file (no shared stylesheet, no Tailwind, no framework)
-- Dark theme with purple gradient (`#667eea` → `#764ba2`) as the brand accent; SonLink page also uses Sony Bravia blue (`#4a9eff`) as a secondary accent
+- Dark theme with purple gradient (`#667eea` → `#764ba2`) as the brand accent; SonLink page also uses blue (`#4a9eff`) as a secondary accent
 - Responsive: desktop-first, single mobile breakpoint at 900px (and 600px for the SonLink detail page)
 - All meta tags, OG tags, and favicon (inline SVG with brand gradient) live in each page's `<head>`
 - Contact email: hello@fireshark.tech

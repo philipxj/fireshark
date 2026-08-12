@@ -6,6 +6,7 @@ require "pathname"
 root = Pathname.new(__dir__).join("..").expand_path
 landing = root.join("apps/sonlink/index.html").read
 home = root.join("index.html").read
+supermote = root.join("apps/supermote/index.html").read
 guide_path = root.join("apps/sonlink/use-phone-as-tv-remote/index.html")
 privacy_policy = root.join("legal/privacy-policy.html").read
 
@@ -30,7 +31,8 @@ errors << "cannot locate SonLink home-page card" unless sonlink_card
 
 public_pages = {
   "SonLink landing page" => landing,
-  "SonLink home-page card" => sonlink_card.to_s
+  "Fireshark home page" => home,
+  "SuperMote landing page" => supermote
 }
 public_pages["TV remote guide"] = guide_path.read if guide_path.exist?
 
@@ -66,4 +68,4 @@ if errors.any?
   exit 1
 end
 
-puts "SonLink public web copy is manufacturer-neutral and privacy-accurate."
+puts "Public web copy is manufacturer-neutral and privacy-accurate for SonLink review."
