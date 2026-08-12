@@ -44,6 +44,8 @@ end
 
 required_landing_copy = [
   "SonLink: Wi-Fi TV Remote",
+  "SonLink supports one specific compatible TV platform",
+  "For multiple TV platforms, use SuperMote",
   "Advertising partners may process device and usage data",
   "not affiliated with, endorsed by, or sponsored by any television manufacturer"
 ]
