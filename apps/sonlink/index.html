@@ -20,9 +20,9 @@
     <meta name="twitter:description" content="The dedicated remote, built only for Sony Bravia.">
     <meta name="twitter:image" content="https://fireshark.tech/image/app_icon/sony_remote_icon.png">
 
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%25' stop-color='%23667eea'/><stop offset='100%25' stop-color='%23764ba2'/></linearGradient></defs><rect width='64' height='64' rx='14' fill='url(%23g)'/><text x='50%25' y='50%25' dy='.35em' text-anchor='middle' font-family='Inter, Arial, sans-serif' font-size='40' font-weight='700' fill='white'>F</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23F97316'/><path d='M20 14h27v9H30v7h15v9H30v13H20z' fill='white'/></svg>">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
 
     <!-- Structured data: helps Google show app name, price, and star rating in search results -->
     <script type="application/ld+json">
@@ -559,13 +559,16 @@
             .phone { transform: scale(0.85); }
             .compat-card { padding: 1.75rem; }
         }
+        :root{--ink:#0D1016;--surface:#171C26;--surface2:#202738;--text:#F4F7FB;--muted:#A9B2C3;--blue:#58A6FF;--line:rgba(244,247,251,.12)}html{scroll-padding-top:5rem}body{font-family:Manrope,sans-serif;background:var(--ink);color:var(--text)}body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}.navbar{background:rgba(13,16,22,.82);border-color:var(--line)}.nav-container,.container,.hero-container{max-width:1280px}.nav-back,.section-subtitle,.feature p,.compat-item p,.step p,.faq-a,footer{color:var(--muted)}.nav-cta,.btn-primary{background:var(--blue)}.nav-cta:hover,.btn:hover{box-shadow:0 12px 28px rgba(88,166,255,.22)}.hero{padding:9rem 0 5rem;background:radial-gradient(circle at 76% 25%,rgba(88,166,255,.18),transparent 28%)}.hero::before{display:none}.hero h1,.section-title,.cta h2{font-family:Sora,sans-serif;letter-spacing:-.055em}.hero h1 .gradient{background:none;-webkit-text-fill-color:currentColor;color:#9dcbff}.hero p.lede{color:var(--muted);font-weight:400}.hero-eyebrow,.section-eyebrow{border-radius:.4rem;color:#9dcbff;border-color:rgba(157,203,255,.3);background:rgba(88,166,255,.1)}.btn{min-height:48px;border-radius:.6rem}.btn-secondary{background:transparent;border-color:var(--line)}section{padding:6rem 0}.why{background:transparent}.why-card,.feature{background:var(--surface);border-color:var(--line);border-radius:1rem}.why-card:hover,.feature:hover{border-color:rgba(157,203,255,.55);transform:translateY(-3px)}.features-grid{gap:1rem}.feature-icon{border-radius:.6rem;background:rgba(88,166,255,.13);color:#9dcbff;font-family:Sora,sans-serif;font-size:1rem;font-weight:700}.gallery{background:var(--surface)}.screenshot-card{border-radius:1rem;border-color:var(--line);background:var(--surface2)}.compat-card{background:var(--surface);border-color:var(--line);border-radius:1rem}.step-number{background:var(--surface2);border:1px solid var(--line);box-shadow:none;color:#9dcbff}.faq{max-width:900px}.faq-q{min-height:64px}.faq-q:focus-visible,.nav-back:focus-visible,.nav-cta:focus-visible,.btn:focus-visible{outline:3px solid #9dcbff;outline-offset:4px}.cta{background:var(--surface)}@media(max-width:600px){section{padding:4.5rem 0}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+        :root{--line:rgba(148,163,184,.24)}
+        .nav-back:hover{color:#9dcbff}
     </style>
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
             <a href="../../index.html" class="nav-back">← Fireshark Tech</a>
-            <a href="https://apps.apple.com/hk/app/sony-tv-remote-bravia-tv/id6474549094" class="nav-cta" target="_blank">Get SonLink</a>
+            <a href="https://apps.apple.com/hk/app/sony-tv-remote-bravia-tv/id6474549094" class="nav-cta" target="_blank" rel="noopener noreferrer">Get SonLink</a>
         </div>
     </nav>
 
@@ -578,8 +581,8 @@
                 <h1>The dedicated remote app for your <span class="gradient">Sony Bravia TV</span>.</h1>
                 <p class="lede">No clutter, no menus for TVs you don't own. SonLink is tuned exclusively for Sony Bravia — fast pairing, instant control, and a layout designed around how you actually use your TV.</p>
                 <div class="hero-buttons">
-                    <a href="https://apps.apple.com/hk/app/sony-tv-remote-bravia-tv/id6474549094" class="btn btn-primary" target="_blank">Download on App Store</a>
-                    <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.sony.bravia.tv.remote" class="btn btn-secondary" target="_blank">Get on Google Play</a>
+                    <a href="https://apps.apple.com/hk/app/sony-tv-remote-bravia-tv/id6474549094" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Download on App Store</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.sony.bravia.tv.remote" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Get on Google Play</a>
                 </div>
             </div>
             <div class="hero-mockup">
@@ -618,32 +621,32 @@
             <p class="section-subtitle">A complete remote, distilled into the gestures and buttons you actually reach for.</p>
             <div class="features-grid">
                 <div class="feature">
-                    <div class="feature-icon">⏻</div>
+                    <div class="feature-icon" aria-hidden="true">01</div>
                     <h3>Power & Volume</h3>
                     <p>Turn your Bravia on and off, mute, and dial in volume — straight from the lock screen if you want.</p>
                 </div>
                 <div class="feature">
-                    <div class="feature-icon">🎯</div>
+                    <div class="feature-icon" aria-hidden="true">02</div>
                     <h3>D-pad Navigation</h3>
                     <p>A precise directional pad with a satisfying OK button, optimized for thumb reach on any phone size.</p>
                 </div>
                 <div class="feature">
-                    <div class="feature-icon">👆</div>
+                    <div class="feature-icon" aria-hidden="true">03</div>
                     <h3>Trackpad Mode</h3>
                     <p>Swipe-to-move and tap-to-select for menus that demand finer control. Especially useful for Sony's BRAVIA OS.</p>
                 </div>
                 <div class="feature">
-                    <div class="feature-icon">📺</div>
+                    <div class="feature-icon" aria-hidden="true">04</div>
                     <h3>App Launcher</h3>
                     <p>Jump straight into Netflix, YouTube, Disney+ and other apps installed on your TV — one tap, no menu diving.</p>
                 </div>
                 <div class="feature">
-                    <div class="feature-icon">📡</div>
+                    <div class="feature-icon" aria-hidden="true">05</div>
                     <h3>Auto Discovery</h3>
                     <p>SonLink scans your Wi-Fi and finds your Bravia automatically. Pair with a single on-TV confirmation.</p>
                 </div>
                 <div class="feature">
-                    <div class="feature-icon">🏠</div>
+                    <div class="feature-icon" aria-hidden="true">06</div>
                     <h3>Multi-TV Support</h3>
                     <p>Got a Bravia in the bedroom and one in the living room? Save and switch between them in two taps.</p>
                 </div>
@@ -775,8 +778,8 @@
             <h2>Ready to ditch the lost remote?</h2>
             <p>Free on App Store and Google Play. Pair in under a minute.</p>
             <div class="hero-buttons" style="justify-content: center;">
-                <a href="https://apps.apple.com/hk/app/sony-tv-remote-bravia-tv/id6474549094" class="btn btn-primary" target="_blank">Download on App Store</a>
-                <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.sony.bravia.tv.remote" class="btn btn-secondary" target="_blank">Get on Google Play</a>
+                <a href="https://apps.apple.com/hk/app/sony-tv-remote-bravia-tv/id6474549094" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Download on App Store</a>
+                <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.sony.bravia.tv.remote" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Get on Google Play</a>
             </div>
         </div>
     </section>
@@ -794,9 +797,15 @@
 
     <script>
         // FAQ accordion
-        document.querySelectorAll('.faq-q').forEach(q => {
+        document.querySelectorAll('.faq-q').forEach((q, index) => {
+            const answer = q.nextElementSibling;
+            const answerId = `sonlink-faq-answer-${index + 1}`;
+            q.setAttribute('aria-expanded', 'false');
+            q.setAttribute('aria-controls', answerId);
+            answer.id = answerId;
             q.addEventListener('click', () => {
-                q.parentElement.classList.toggle('open');
+                const isOpen = q.parentElement.classList.toggle('open');
+                q.setAttribute('aria-expanded', String(isOpen));
             });
         });
 

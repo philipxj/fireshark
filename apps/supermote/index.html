@@ -20,9 +20,9 @@
     <meta name="twitter:description" content="One remote for every TV in your home — Samsung, LG, Sony, TCL, Hisense, Google TV and more.">
     <meta name="twitter:image" content="https://fireshark.tech/image/app_icon/supermote_icon.png">
 
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%25' stop-color='%23667eea'/><stop offset='100%25' stop-color='%23764ba2'/></linearGradient></defs><rect width='64' height='64' rx='14' fill='url(%23g)'/><text x='50%25' y='50%25' dy='.35em' text-anchor='middle' font-family='Inter, Arial, sans-serif' font-size='40' font-weight='700' fill='white'>F</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23F97316'/><path d='M20 14h27v9H30v7h15v9H30v13H20z' fill='white'/></svg>">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
 
     <!-- Structured data: app name, price and platforms for Google rich results -->
     <script type="application/ld+json">
@@ -260,13 +260,20 @@
             .compat-card { padding: 1.75rem; }
             .hero-brands { grid-template-columns: 1fr 1fr; }
         }
+        :root{--ink:#0D1016;--surface:#171C26;--surface2:#202738;--text:#F4F7FB;--muted:#A9B2C3;--accent:#F97316;--line:rgba(244,247,251,.12)}
+        html{scroll-padding-top:5rem} body{font-family:Manrope,sans-serif;background:var(--ink);color:var(--text)} body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.03;z-index:20;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}.navbar{background:rgba(13,16,22,.82);border-color:var(--line)}.nav-container,.container,.hero-container{max-width:1280px}.nav-back,.section-subtitle,.feature p,.brand-card p,.compat-item p,.step p,.faq-a,footer{color:var(--muted)}.nav-cta,.btn-primary{background:var(--accent)}.nav-cta:hover,.btn:hover{box-shadow:0 12px 28px rgba(139,92,246,.24)}
+        .hero{padding:9rem 0 5rem;background:radial-gradient(circle at 78% 25%,rgba(249,115,22,.18),transparent 28%)}.hero::before{display:none}.hero h1,.section-title,.cta h2{font-family:Sora,sans-serif;letter-spacing:-.055em}.hero h1 .gradient{background:none;-webkit-text-fill-color:currentColor;color:#fdba74}.hero p.lede{color:var(--muted);font-weight:400}.hero-eyebrow,.section-eyebrow{border-radius:.4rem;color:#fdba74;border-color:rgba(253,186,116,.28);background:rgba(249,115,22,.1)}.btn{min-height:48px;border-radius:.6rem}.btn-secondary{border-color:var(--line);background:transparent}.hero-visual{position:relative;display:flex;justify-content:center;align-items:center;min-height:540px}.hero-visual::before{content:"";position:absolute;width:280px;height:280px;background:rgba(249,115,22,.16);filter:blur(55px);border-radius:50%}.hero-visual img{position:relative;z-index:1;width:auto!important;height:520px;max-width:100%;object-fit:contain;border-radius:28px;box-shadow:0 28px 58px rgba(0,0,0,.42)}
+        section{padding:6rem 0}.brands{background:transparent}.brand-card,.feature{background:var(--surface);border-color:var(--line);border-radius:1rem}.brand-card:hover,.feature:hover{border-color:rgba(253,186,116,.55);transform:translateY(-3px)}.features-grid{gap:1rem}.feature-icon{border-radius:.6rem;background:rgba(249,115,22,.13);color:#fdba74;font-family:Sora,sans-serif;font-size:1rem;font-weight:700}.compat-card{background:var(--surface);border-color:var(--line);border-radius:1rem}.step-number{background:var(--surface2);border:1px solid var(--line);box-shadow:none;color:#fdba74}.faq{max-width:900px}.faq-q{min-height:64px}.faq-q:focus-visible,.nav-back:focus-visible,.nav-cta:focus-visible,.btn:focus-visible{outline:3px solid #fdba74;outline-offset:4px}.gallery{overflow:hidden}.screens{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;margin-top:3rem}.screens img{width:100%;height:auto;border-radius:1rem;background:var(--surface);box-shadow:0 20px 40px rgba(0,0,0,.22)}.cta{background:var(--surface)}
+        @media(max-width:900px){.hero-container{grid-template-columns:1fr}.hero-visual{order:-1}.hero-visual img{width:190px}.screens{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.screens{grid-template-columns:1fr 1fr}section{padding:4.5rem 0}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+        :root{--line:rgba(148,163,184,.24)}
+        .nav-back:hover{color:#fdba74}.nav-cta:hover,.btn:hover{box-shadow:0 12px 28px rgba(249,115,22,.24)}.faq-q::after{color:#fdba74}
     </style>
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
             <a href="../../index.html" class="nav-back">← Fireshark Tech</a>
-            <a href="https://apps.apple.com/hk/app/superremote-tv-remote/id6743916971" class="nav-cta" target="_blank">Get SuperMote</a>
+            <a href="https://apps.apple.com/hk/app/superremote-tv-remote/id6743916971" class="nav-cta" target="_blank" rel="noopener noreferrer">Get SuperMote</a>
         </div>
     </nav>
 
@@ -279,19 +286,12 @@
                 <h1>One remote for <span class="gradient">every TV in your home</span>.</h1>
                 <p class="lede">Lost your TV remote again? SuperMote turns your phone into a universal Wi-Fi remote for Samsung, LG, Sony BRAVIA, TCL, Hisense, Google TV and more — pair in seconds, control them all from one clean app.</p>
                 <div class="hero-buttons">
-                    <a href="https://apps.apple.com/hk/app/superremote-tv-remote/id6743916971" class="btn btn-primary" target="_blank">Download on App Store</a>
-                    <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.remotex.smarttvremote" class="btn btn-secondary" target="_blank">Get on Google Play</a>
+                    <a href="https://apps.apple.com/hk/app/superremote-tv-remote/id6743916971" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Download on App Store</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.remotex.smarttvremote" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Get on Google Play</a>
                 </div>
             </div>
-            <div class="hero-brands">
-                <div class="brand-chip"><span class="dot"></span>Samsung</div>
-                <div class="brand-chip"><span class="dot"></span>LG</div>
-                <div class="brand-chip"><span class="dot"></span>Sony BRAVIA</div>
-                <div class="brand-chip"><span class="dot"></span>Google TV</div>
-                <div class="brand-chip"><span class="dot"></span>TCL</div>
-                <div class="brand-chip"><span class="dot"></span>Hisense</div>
-                <div class="brand-chip"><span class="dot"></span>Philips</div>
-                <div class="brand-chip"><span class="dot"></span>Xiaomi</div>
+            <div class="hero-visual">
+                <img src="../../image/supermote/screen_2.webp" width="1200" height="2601" alt="SuperMote remote controls screen" fetchpriority="high">
             </div>
         </div>
     </header>
@@ -326,32 +326,32 @@
             <p class="section-subtitle">A complete remote, distilled into the buttons and gestures you actually reach for.</p>
             <div class="features-grid">
                 <div class="feature">
-                    <div class="feature-icon">📺</div>
+                    <div class="feature-icon" aria-hidden="true">01</div>
                     <h3>Full TV Control</h3>
                     <p>Power, volume, mute, channels, navigation and playback — the familiar buttons, on your phone.</p>
                 </div>
                 <div class="feature">
-                    <div class="feature-icon">📡</div>
+                    <div class="feature-icon" aria-hidden="true">02</div>
                     <h3>Quick Discovery</h3>
                     <p>SuperMote scans your Wi-Fi and finds supported smart TVs nearby, automatically.</p>
                 </div>
                 <div class="feature">
-                    <div class="feature-icon">🔗</div>
+                    <div class="feature-icon" aria-hidden="true">03</div>
                     <h3>Easy Pairing</h3>
                     <p>Connect with your TV's standard on-screen pairing or approval. No complicated setup.</p>
                 </div>
                 <div class="feature">
-                    <div class="feature-icon">👆</div>
+                    <div class="feature-icon" aria-hidden="true">04</div>
                     <h3>Touchpad Navigation</h3>
                     <p>Swipe and tap to move through menus and apps on supported TVs.</p>
                 </div>
                 <div class="feature">
-                    <div class="feature-icon">🏠</div>
+                    <div class="feature-icon" aria-hidden="true">05</div>
                     <h3>Multi-TV Support</h3>
                     <p>Save and switch between every TV in your home — bedroom, living room, anywhere.</p>
                 </div>
                 <div class="feature">
-                    <div class="feature-icon">🔒</div>
+                    <div class="feature-icon" aria-hidden="true">06</div>
                     <h3>Local &amp; Private</h3>
                     <p>Works over your own Wi-Fi. No account required to control your TVs.</p>
                 </div>
@@ -360,6 +360,9 @@
     </section>
 
     <!-- How it works -->
+    <section class="gallery" aria-labelledby="supermote-screens-title">
+        <div class="container"><p class="section-eyebrow">The remote, in your pocket</p><h2 id="supermote-screens-title" class="section-title">See SuperMote at work.</h2><div class="screens"><img src="../../image/supermote/screen_1.webp" width="1200" height="2601" loading="lazy" alt="SuperMote supported TV brands screen"><img src="../../image/supermote/screen_2.webp" width="1200" height="2601" loading="lazy" alt="SuperMote remote controls screen"><img src="../../image/supermote/screen_3.webp" width="1200" height="2601" loading="lazy" alt="SuperMote touchpad screen"><img src="../../image/supermote/screen_4.webp" width="1200" height="2601" loading="lazy" alt="SuperMote settings screen"></div></div>
+    </section>
     <section>
         <div class="container">
             <div class="section-eyebrow">Get started in 60 seconds</div>
@@ -448,8 +451,8 @@
             <h2>Ready to ditch the lost remote?</h2>
             <p>Free on App Store and Google Play. Pair in under a minute.</p>
             <div class="hero-buttons" style="justify-content: center;">
-                <a href="https://apps.apple.com/hk/app/superremote-tv-remote/id6743916971" class="btn btn-primary" target="_blank">Download on App Store</a>
-                <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.remotex.smarttvremote" class="btn btn-secondary" target="_blank">Get on Google Play</a>
+                <a href="https://apps.apple.com/hk/app/superremote-tv-remote/id6743916971" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Download on App Store</a>
+                <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.remotex.smarttvremote" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Get on Google Play</a>
             </div>
         </div>
     </section>
@@ -466,8 +469,16 @@
     </footer>
 
     <script>
-        document.querySelectorAll('.faq-q').forEach(q => {
-            q.addEventListener('click', () => { q.parentElement.classList.toggle('open'); });
+        document.querySelectorAll('.faq-q').forEach((q, index) => {
+            const answer = q.nextElementSibling;
+            const answerId = `supermote-faq-answer-${index + 1}`;
+            q.setAttribute('aria-expanded', 'false');
+            q.setAttribute('aria-controls', answerId);
+            answer.id = answerId;
+            q.addEventListener('click', () => {
+                const isOpen = q.parentElement.classList.toggle('open');
+                q.setAttribute('aria-expanded', String(isOpen));
+            });
         });
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {

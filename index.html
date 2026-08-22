@@ -24,9 +24,9 @@
     <meta name="twitter:image" content="https://fireshark.tech/image/app_icon/supermote_icon.png">
 
     <!-- Favicon (inline SVG with brand gradient) -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%25' stop-color='%23667eea'/><stop offset='100%25' stop-color='%23764ba2'/></linearGradient></defs><rect width='64' height='64' rx='14' fill='url(%23g)'/><text x='50%25' y='50%25' dy='.35em' text-anchor='middle' font-family='Inter, Arial, sans-serif' font-size='40' font-weight='700' fill='white'>F</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23F97316'/><path d='M20 14h27v9H30v7h15v9H30v13H20z' fill='white'/></svg>">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -417,78 +417,108 @@
                 padding: 1.5rem;
             }
         }
+        /* 2026 product-studio refresh */
+        :root { --ink:#0D1016; --surface:#171C26; --surface-2:#202738; --text:#F4F7FB; --muted:#A9B2C3; --accent:#F97316; --line:rgba(148,163,184,.24); }
+        html { scroll-padding-top: 5.5rem; }
+        body { font-family: Manrope, sans-serif; background:var(--ink); color:var(--text); }
+        body::before { content:""; position:fixed; inset:0; pointer-events:none; opacity:.035; z-index:5; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E"); }
+        .skip-link { position:absolute; left:1rem; top:-4rem; z-index:2000; padding:.75rem 1rem; color:#fff; background:var(--accent); border-radius:.5rem; } .skip-link:focus { top:1rem; }
+        .navbar { background:rgba(13,16,22,.82); border-color:var(--line); } .nav-container,.container { max-width:1280px; } .logo,.section-title { font-family:Sora,sans-serif; background:none; -webkit-text-fill-color:currentColor; color:var(--text); }
+        .nav-links a:hover,.learn-more:hover { color:#fdba74; } .nav-links a::after { background:var(--accent); }
+        .mobile-menu { border:0; background:transparent; padding:.5rem; min-width:44px; min-height:44px; align-items:center; justify-content:center; } .mobile-menu:focus-visible,.nav-links a:focus-visible,a:focus-visible { outline:3px solid #fdba74; outline-offset:4px; border-radius:4px; }
+        .studio-hero { position:relative; overflow:hidden; padding:clamp(8rem,16vw,12rem) 0 5.5rem; background:radial-gradient(circle at 80% 18%,rgba(249,115,22,.18),transparent 28%); }
+        .studio-hero .container { display:grid; grid-template-columns:1.1fr .9fr; gap:3rem; align-items:center; } .eyebrow { color:#fdba74; font-size:.75rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
+        h1 { max-width:760px; margin:.85rem 0 1.25rem; font:600 clamp(3rem,7vw,6.5rem)/.98 Sora,sans-serif; letter-spacing:-.07em; text-wrap:balance; } .hero-copy { max-width:36rem; color:var(--muted); font-size:1.1rem; }
+        .hero-cta { display:inline-flex; margin-top:2rem; align-items:center; justify-content:center; min-height:48px; padding:.8rem 1.2rem; border-radius:.6rem; color:#fff; background:var(--accent); font-weight:700; text-decoration:none; transition:transform .2s,background .2s; } .hero-cta:hover { transform:translateY(-2px); background:#fb923c; }
+        .icon-cluster { min-height:310px; position:relative; } .icon-cluster img { position:absolute; width:clamp(66px,9vw,118px); border-radius:24%; box-shadow:0 24px 40px rgba(0,0,0,.35); } .icon-cluster img:nth-child(1){left:4%;top:6%}.icon-cluster img:nth-child(2){right:4%;top:0}.icon-cluster img:nth-child(3){left:32%;top:25%}.icon-cluster img:nth-child(4){right:18%;bottom:0}.icon-cluster img:nth-child(5){left:9%;bottom:8%}.icon-cluster img:nth-child(6){right:38%;bottom:13%}
+        .apps-section { padding:5.5rem 0 7rem; background:var(--ink); } .section-heading { max-width:600px; margin-bottom:3rem; } .section-title { text-align:left; margin:0; font-size:clamp(2rem,4vw,3.4rem); letter-spacing:-.05em; } .section-intro { margin-top:.75rem; color:var(--muted); }
+        .apps-grid { grid-template-columns:repeat(12,1fr); gap:1rem; margin:0; } .app-card { grid-column:span 6; display:flex; flex-direction:column; align-items:flex-start; min-height:330px; padding:2rem; text-align:left; background:var(--surface); border:1px solid var(--line); border-radius:1rem; } .app-card.featured { grid-column:span 6; min-height:390px; background:linear-gradient(145deg,#202738,#171C26 70%); } .app-card::before { display:none; } .app-card:hover { transform:translateY(-4px); box-shadow:0 24px 48px rgba(0,0,0,.22); border-color:rgba(249,115,22,.72); }
+        .app-icon { width:76px; height:76px; margin:0 0 1.5rem; box-shadow:0 12px 28px rgba(0,0,0,.28); } .app-card h3 { font:600 clamp(1.35rem,2.3vw,2rem)/1.15 Sora,sans-serif; margin:0 0 .75rem; } .app-card p { color:var(--muted); margin:0 0 1.5rem; font-weight:400; max-width:34rem; } .download-buttons { margin-top:auto; justify-content:flex-start; gap:.65rem; } .download-btn { min-height:44px; border-radius:.55rem; padding:.7rem 1rem; } .app-store { background:var(--accent); } .google-play { background:transparent; border-color:var(--line); } .learn-more { color:#fdba74; margin-top:1rem; }
+        .contact-section { background:var(--surface); padding:5.5rem 0; } .contact-content { text-align:left; max-width:760px; } .contact-email { min-height:48px; padding:.8rem 1rem; border-radius:.55rem; background:transparent; border-color:var(--line); } .contact-email:hover { background:var(--accent); box-shadow:none; transform:translateY(-2px); } .footer { background:var(--ink); border-color:var(--line); }
+        @media (max-width:768px){ .studio-hero .container{grid-template-columns:1fr}.icon-cluster{min-height:210px;max-width:380px}.apps-grid,.app-card,.app-card.featured{grid-column:1/-1}.app-card{min-height:0}.mobile-menu{display:flex}.nav-links{background:var(--surface)} }
+        @media (prefers-reduced-motion:reduce){ *,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important;} }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header>
+    <nav class="navbar" aria-label="Primary navigation">
         <div class="nav-container">
-            <div class="logo">Fireshark Tech</div>
+            <a class="logo" href="index.html" aria-label="Fireshark Tech home">Fireshark Tech</a>
             <ul class="nav-links">
                 <li><a href="#home">Our Apps</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <div class="mobile-menu">
+            <button class="mobile-menu" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-links">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
         </div>
     </nav>
+    </header>
 
-    <!-- Apps Portfolio Section -->
-    <section id="home" class="apps-section" style="padding-top: 8rem;">
+    <main id="main-content">
+    <section class="studio-hero" aria-labelledby="page-title">
+        <div class="container"><div><p class="eyebrow">Independent app studio</p><h1 id="page-title">Useful apps, made with focus.</h1><p class="hero-copy">Fireshark builds polished tools for the moments people reach for their phones, browsers, and everyday routines.</p><a class="hero-cta" href="#home">Explore our apps <span aria-hidden="true">↓</span></a></div><div class="icon-cluster" aria-label="Fireshark app icons"><img src="image/app_icon/sony_remote_icon.png" alt="SonLink app icon"><img src="image/app_icon/supermote_icon.png" alt="SuperMote app icon"><img src="image/app_icon/goodbus_icon.png" alt="Goodbus app icon"><img src="image/app_icon/ponpon_math_icon.png" alt="Pon Pon Math app icon"><img src="image/app_icon/twindle_icon.png" alt="Twindle app icon"><img src="image/app_icon/hong_kong_weather_icon.png" alt="Hong Kong Weather app icon"></div></div>
+    </section>
+    <section id="home" class="apps-section">
         <div class="container">
-            <h2 class="section-title">Our Applications</h2>
+            <div class="section-heading"><p class="eyebrow">The portfolio</p><h2 class="section-title">Made for everyday use.</h2><p class="section-intro">Focused experiences for your home, your commute, and your family.</p></div>
             <div class="apps-grid">
 
                      <!-- App 2: SonLink TV Remote -->
-                     <div class="app-card clickable">
+                     <article class="app-card featured clickable">
                         <a href="apps/sonlink/index.html" class="card-link-overlay" aria-label="Learn more about SonLink">SonLink details</a>
                         <img src="image/app_icon/sony_remote_icon.png" alt="SonLink TV Remote App Icon" class="app-icon">
                         <h3>SonLink: TV Remote</h3>
                         <p>Smart remote control designed specifically for Sony Bravia TVs, providing complete control experience.</p>
                         <div class="download-buttons">
-                            <a href="https://apps.apple.com/hk/app/sonlink-tv-remote/id6474549094" class="download-btn app-store" target="_blank">App Store</a>
-                            <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.sony.bravia.tv.remote" class="download-btn google-play" target="_blank">Google Play</a>
+                            <a href="https://apps.apple.com/hk/app/sonlink-tv-remote/id6474549094" class="download-btn app-store" target="_blank" rel="noopener noreferrer">App Store</a>
+                            <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.sony.bravia.tv.remote" class="download-btn google-play" target="_blank" rel="noopener noreferrer">Google Play</a>
                         </div>
                         <a href="apps/sonlink/index.html" class="learn-more">Learn more →</a>
-                    </div>
+                    </article>
+
+                <article class="app-card clickable"><a href="https://twindle.fireshark.tech/" class="card-link-overlay" aria-label="Open Twindle" target="_blank" rel="noopener noreferrer">Twindle</a><img src="image/app_icon/twindle_icon.png" alt="Twindle app icon" class="app-icon"><h3>Twindle</h3><p>A daily twin-equation math puzzle for web, iOS, and Android.</p><div class="download-buttons"><a href="https://twindle.fireshark.tech/" class="download-btn app-store" target="_blank" rel="noopener noreferrer">Web App</a><a href="https://apps.apple.com/us/app/twindle-daily-math-puzzle/id6779842276" class="download-btn app-store" target="_blank" rel="noopener noreferrer">App Store</a><a href="https://play.google.com/store/apps/details?id=com.firesharkhk.twindle" class="download-btn google-play" target="_blank" rel="noopener noreferrer">Google Play</a></div></article>
 
                 <!-- App 1: Goodbus -->
-                <div class="app-card">
+                <article class="app-card">
                     <img src="image/app_icon/goodbus_icon.png" alt="Goodbus App Icon" class="app-icon">
                     <h3>Goodbus</h3>
                     <p>Hong Kong bus arrival time app that helps you easily track bus schedules and timing information.</p>
                     <div class="download-buttons">
-                        <a href="https://apps.apple.com/hk/app/goodbus-%E9%A6%99%E6%B8%AF%E5%B7%B4%E5%A3%AB%E5%88%B0%E7%AB%99%E6%99%82%E9%96%93/id1573111465" class="download-btn app-store" target="_blank">App Store</a>
-                        <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.goodbus" class="download-btn google-play" target="_blank">Google Play</a>
+                        <a href="https://apps.apple.com/hk/app/goodbus-%E9%A6%99%E6%B8%AF%E5%B7%B4%E5%A3%AB%E5%88%B0%E7%AB%99%E6%99%82%E9%96%93/id1573111465" class="download-btn app-store" target="_blank" rel="noopener noreferrer">App Store</a>
+                        <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.goodbus" class="download-btn google-play" target="_blank" rel="noopener noreferrer">Google Play</a>
                     </div>
-                </div>
+                    </article>
+
+                <article class="app-card clickable"><a href="https://chromewebstore.google.com/detail/%E9%A6%99%E6%B8%AF%E5%A4%A9%E6%B0%A3%E8%AD%A6%E5%A0%B1/chmlbbhplbepjboepkcngfnmbellhfge" class="card-link-overlay" aria-label="Open Hong Kong Weather" target="_blank" rel="noopener noreferrer">Hong Kong Weather</a><img src="image/app_icon/hong_kong_weather_icon.png" alt="Hong Kong Weather extension icon" class="app-icon"><h3>Hong Kong Weather</h3><p>A browser extension with weather warnings, radar, lightning locations, forecasts, and toolbar updates.</p><div class="download-buttons"><a href="https://chromewebstore.google.com/detail/%E9%A6%99%E6%B8%AF%E5%A4%A9%E6%B0%A3%E8%AD%A6%E5%A0%B1/chmlbbhplbepjboepkcngfnmbellhfge" class="download-btn app-store" target="_blank" rel="noopener noreferrer">Chrome</a><a href="https://addons.mozilla.org/zh-TW/firefox/addon/%E9%A6%99%E6%B8%AF%E5%A4%A9%E6%B0%A3%E9%A0%90%E5%A0%B1-hong-kong-weather/" class="download-btn google-play" target="_blank" rel="noopener noreferrer">Firefox</a><a href="https://microsoftedge.microsoft.com/addons/detail/%E9%A6%99%E6%B8%AF%E5%A4%A9%E6%B0%A3%E8%AD%A6%E5%A0%B1/koemdfkhpkadjclicmmjoaglaapcdlco" class="download-btn google-play" target="_blank" rel="noopener noreferrer">Edge</a></div></article>
 
                 <!-- App 3: SuperMote -->
-                <div class="app-card clickable">
+                <article class="app-card featured clickable">
                     <a href="apps/supermote/index.html" class="card-link-overlay" aria-label="Learn more about SuperMote">SuperMote details</a>
                     <img src="image/app_icon/supermote_icon.png" alt="SuperMote TV Remote App Icon" class="app-icon">
                     <h3>SuperMote: TV Remote Control</h3>
                     <p>Universal Wi-Fi remote for Samsung, LG, Sony BRAVIA, Google TV, TCL, Hisense, and more — auto-discover, pair in seconds, and control multiple TVs from one clean interface.</p>
                     <div class="download-buttons">
-                        <a href="https://apps.apple.com/hk/app/superremote-tv-remote/id6743916971" class="download-btn app-store" target="_blank">App Store</a>
-                        <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.remotex.smarttvremote" class="download-btn google-play" target="_blank">Google Play</a>
+                        <a href="https://apps.apple.com/hk/app/superremote-tv-remote/id6743916971" class="download-btn app-store" target="_blank" rel="noopener noreferrer">App Store</a>
+                        <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.remotex.smarttvremote" class="download-btn google-play" target="_blank" rel="noopener noreferrer">Google Play</a>
                     </div>
                     <a href="apps/supermote/index.html" class="learn-more">Learn more →</a>
-                </div>
+                </article>
 
                 <!-- App 4: Pon Pon Math -->
-                <div class="app-card">
+                <article class="app-card">
                     <img src="image/app_icon/ponpon_math_icon.png" alt="Pon Pon Math App Icon" class="app-icon">
                     <h3>Pon Pon Math</h3>
                     <p>Fun math game that helps children learn mathematics through gameplay and improve calculation skills.</p>
                     <div class="download-buttons">
-                        <a href="https://apps.apple.com/hk/app/pon-pon-math/id6479554927" class="download-btn app-store" target="_blank">App Store</a>
-<!--                         <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.ponponmath" class="download-btn google-play" target="_blank">Google Play</a> -->
+                        <a href="https://apps.apple.com/hk/app/pon-pon-math/id6479554927" class="download-btn app-store" target="_blank" rel="noopener noreferrer">App Store</a>
+<!--                         <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.ponponmath" class="download-btn google-play" target="_blank" rel="noopener noreferrer">Google Play</a> -->
                     </div>
-                </div>
+                </article>
 
             </div>
         </div>
@@ -508,6 +538,7 @@
     </section>
 
     <!-- Footer -->
+    </main>
     <footer class="footer">
         <div class="footer-links">
             <a href="legal/terms-of-use.html">Terms of Use</a>
@@ -539,7 +570,12 @@
         mobileMenu.addEventListener('click', () => {
             navLinks.classList.toggle('open');
             mobileMenu.classList.toggle('open');
+            const isOpen = navLinks.classList.contains('open');
+            mobileMenu.setAttribute('aria-expanded', isOpen);
+            mobileMenu.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
         });
+        navLinks.id = 'primary-links';
+        document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && navLinks.classList.contains('open')) mobileMenu.click(); });
 
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
