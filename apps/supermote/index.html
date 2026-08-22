@@ -171,29 +171,18 @@
             background: rgba(249, 115, 22, .16);
             filter: blur(55px);
         }
-
-        /*
-         * App Store artwork is 1200×2601 and includes promotional framing.
-         * The crop corresponds to the phone-bezel region documented in AGENTS.md,
-         * scaled from (184,555)-(1098,2478) on the 1284×2778 source.
-         */
         .screen-crop {
             position: relative;
             overflow: hidden;
-            aspect-ratio: 854 / 1800;
+            aspect-ratio: 600 / 1265;
             border-radius: 1rem;
             background: var(--surface);
             box-shadow: 0 20px 40px rgba(0, 0, 0, .22);
         }
         .screen-crop img {
-            position: absolute;
-            left: -20.14%;
-            top: -28.89%;
-            width: 140.52%;
-            max-width: none;
+            display: block;
+            width: 100%;
             height: auto;
-            border-radius: 0;
-            box-shadow: none;
         }
         .hero-shot { z-index: 1; width: 247px; border-radius: 28px; box-shadow: 0 28px 58px rgba(0, 0, 0, .42); }
 
@@ -363,7 +352,7 @@
             </div>
             <div class="hero-visual">
                 <div class="screen-crop hero-shot">
-                    <img src="../../image/supermote/screen_2.webp" width="1200" height="2601" alt="SuperMote remote controls screen" fetchpriority="high">
+                    <img src="../../image/supermote/screen_2.webp" width="600" height="1265" alt="SuperMote remote controls screen" fetchpriority="high">
                 </div>
             </div>
         </div>
@@ -411,10 +400,10 @@
                 <p class="section-eyebrow">The remote, in your pocket</p>
                 <h2 id="supermote-screens-title" class="section-title">See SuperMote at work.</h2>
                 <div class="screens">
-                    <div class="screen-crop"><img src="../../image/supermote/screen_1.webp" width="1200" height="2601" loading="lazy" alt="SuperMote numeric keypad screen"></div>
-                    <div class="screen-crop"><img src="../../image/supermote/screen_2.webp" width="1200" height="2601" loading="lazy" alt="SuperMote remote controls screen"></div>
-                    <div class="screen-crop"><img src="../../image/supermote/screen_3.webp" width="1200" height="2601" loading="lazy" alt="SuperMote D-pad navigation screen"></div>
-                    <div class="screen-crop"><img src="../../image/supermote/screen_4.webp" width="1200" height="2601" loading="lazy" alt="SuperMote touchpad screen"></div>
+                    <div class="screen-crop"><img src="../../image/supermote/screen_1.webp" width="600" height="1265" loading="lazy" alt="SuperMote numeric keypad screen"></div>
+                    <div class="screen-crop"><img src="../../image/supermote/screen_2.webp" width="600" height="1265" loading="lazy" alt="SuperMote remote controls screen"></div>
+                    <div class="screen-crop"><img src="../../image/supermote/screen_3.webp" width="600" height="1265" loading="lazy" alt="SuperMote D-pad navigation screen"></div>
+                    <div class="screen-crop"><img src="../../image/supermote/screen_4.webp" width="600" height="1265" loading="lazy" alt="SuperMote touchpad screen"></div>
                 </div>
             </div>
         </section>
