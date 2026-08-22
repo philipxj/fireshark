@@ -7,350 +7,321 @@
     <meta name="description" content="Fireshark Tech designs and ships polished apps for web, iOS, Android, and browsers — including Hong Kong Weather, Twindle, SuperMote, SonLink, Goodbus, and Pon Pon Math.">
     <meta name="keywords" content="Fireshark Tech, app development, web apps, iOS apps, Android apps, browser extension, Hong Kong Weather, Twindle, math puzzle, SuperMote, smart TV remote, Hong Kong app developer">
     <meta name="author" content="Fireshark Tech">
-    <meta name="theme-color" content="#121212">
+    <meta name="theme-color" content="#0D1016">
     <link rel="canonical" href="https://fireshark.tech/">
 
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://fireshark.tech/">
     <meta property="og:title" content="Fireshark Tech - Professional App Development">
     <meta property="og:description" content="We design and ship polished apps for web, iOS, Android, and browsers. Explore weather, puzzle, smart TV remote, transit, and educational apps.">
     <meta property="og:image" content="https://fireshark.tech/image/app_icon/supermote_icon.png">
 
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Fireshark Tech - Professional App Development">
     <meta name="twitter:description" content="We design and ship polished apps for web, iOS, Android, and browsers. Explore weather, puzzle, smart TV remote, transit, and educational apps.">
     <meta name="twitter:image" content="https://fireshark.tech/image/app_icon/supermote_icon.png">
 
-    <!-- Favicon (inline SVG with brand gradient) -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23F97316'/><path d='M20 14h27v9H30v7h15v9H30v13H20z' fill='white'/></svg>">
-
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --ink: #0D1016;
+            --surface: #171C26;
+            --surface-2: #202738;
+            --text: #F4F7FB;
+            --muted: #A9B2C3;
+            --accent: #F97316;
+            --accent-light: #FDBA74;
+            --line: rgba(148, 163, 184, .24);
         }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #121212;
-            color: #ffffff;
+            font-family: Manrope, sans-serif;
+            background: var(--ink);
+            color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
         }
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: .035;
+            z-index: 5;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
+        }
+        a { color: inherit; }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
+        .skip-link {
+            position: absolute;
+            left: 1rem;
+            top: -4rem;
+            z-index: 2000;
+            padding: .75rem 1rem;
+            color: #fff;
+            background: var(--accent);
+            border-radius: .5rem;
+        }
+        .skip-link:focus { top: 1rem; }
 
-        /* Navbar */
         .navbar {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(18, 18, 18, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 0;
+            background: rgba(13, 16, 22, .82);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line);
         }
-
         .nav-container {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             padding: 0 2rem;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-links {
             display: flex;
-            list-style: none;
-            gap: 2rem;
+            align-items: center;
+            justify-content: space-between;
         }
-
+        .logo {
+            font: 700 1.5rem/1 Sora, sans-serif;
+            color: var(--text);
+            text-decoration: none;
+        }
+        .nav-links { display: flex; list-style: none; gap: 2rem; }
         .nav-links a {
-            color: #ffffff;
+            position: relative;
+            color: var(--text);
             text-decoration: none;
             font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
         }
-
-        .nav-links a:hover {
-            color: #667eea;
-        }
-
         .nav-links a::after {
-            content: '';
+            content: "";
             position: absolute;
+            left: 0;
+            bottom: -.35rem;
             width: 0;
             height: 2px;
-            bottom: -5px;
-            left: 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            transition: width 0.3s ease;
+            background: var(--accent);
+            transition: width .2s ease;
         }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
+        .nav-links a:hover { color: var(--accent-light); }
+        .nav-links a:hover::after { width: 100%; }
         .mobile-menu {
             display: none;
             flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 44px;
+            min-height: 44px;
+            padding: .5rem;
+            border: 0;
+            background: transparent;
             cursor: pointer;
         }
-
         .mobile-menu span {
             width: 25px;
             height: 3px;
-            background: #ffffff;
             margin: 3px 0;
-            transition: 0.3s;
+            background: #fff;
+            transition: transform .2s ease, opacity .2s ease;
+        }
+        .mobile-menu.open span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+        .mobile-menu.open span:nth-child(2) { opacity: 0; }
+        .mobile-menu.open span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+        .mobile-menu:focus-visible,
+        .nav-links a:focus-visible,
+        a:focus-visible {
+            outline: 3px solid var(--accent-light);
+            outline-offset: 4px;
+            border-radius: 4px;
         }
 
-
-        /* Apps Section */
-        .apps-section {
-            padding: 5rem 0;
-            background-color: #1a1a1a;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
-            background: linear-gradient(135deg, #ffffff 0%, #667eea 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .apps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .app-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .studio-hero {
             position: relative;
             overflow: hidden;
+            padding: clamp(8rem, 16vw, 12rem) 0 5.5rem;
+            background: radial-gradient(circle at 80% 18%, rgba(249, 115, 22, .18), transparent 28%);
         }
-
-        .app-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
-            transition: left 0.5s;
+        .studio-hero .container {
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            gap: 3rem;
+            align-items: center;
         }
-
-        .app-card:hover::before {
-            left: 100%;
+        .eyebrow {
+            color: var(--accent-light);
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
         }
-
-        .app-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
-            border-color: rgba(102, 126, 234, 0.3);
+        h1 {
+            max-width: 760px;
+            margin: .85rem 0 1.25rem;
+            font: 600 clamp(3rem, 7vw, 6.5rem)/.98 Sora, sans-serif;
+            letter-spacing: -.07em;
+            text-wrap: balance;
         }
-
-        .app-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 20px;
-            margin: 0 auto 1.5rem;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .app-card h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: #ffffff;
-        }
-
-        .app-badge {
+        .hero-copy { max-width: 36rem; color: var(--muted); font-size: 1.1rem; }
+        .hero-cta {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            margin: -0.35rem auto 1rem;
-            padding: 0.28rem 0.7rem;
-            border-radius: 999px;
-            background: rgba(74, 158, 255, 0.13);
-            border: 1px solid rgba(74, 158, 255, 0.32);
-            color: #8fc7ff;
-            font-size: 0.74rem;
+            min-height: 48px;
+            margin-top: 2rem;
+            padding: .8rem 1.2rem;
+            border-radius: .6rem;
+            color: #fff;
+            background: var(--accent);
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
+            text-decoration: none;
+            transition: transform .2s ease, background .2s ease;
         }
-
-        .app-card p {
-            color: #b0b0b0;
-            margin-bottom: 1.5rem;
-            font-weight: 300;
+        .hero-cta:hover { transform: translateY(-2px); background: #FB923C; }
+        .icon-cluster { min-height: 310px; position: relative; }
+        .icon-cluster img {
+            position: absolute;
+            width: clamp(66px, 9vw, 118px);
+            border-radius: 24%;
+            box-shadow: 0 24px 40px rgba(0, 0, 0, .35);
         }
+        .icon-cluster img:nth-child(1) { left: 4%; top: 6%; }
+        .icon-cluster img:nth-child(2) { right: 4%; top: 0; }
+        .icon-cluster img:nth-child(3) { left: 32%; top: 25%; }
+        .icon-cluster img:nth-child(4) { right: 18%; bottom: 0; }
+        .icon-cluster img:nth-child(5) { left: 9%; bottom: 8%; }
+        .icon-cluster img:nth-child(6) { right: 38%; bottom: 13%; }
 
-        .download-buttons {
-            display: flex;
+        .apps-section { padding: 5.5rem 0 7rem; }
+        .section-heading { max-width: 600px; margin-bottom: 3rem; }
+        .section-title {
+            margin: 0;
+            font: 600 clamp(2rem, 4vw, 3.4rem)/1.08 Sora, sans-serif;
+            letter-spacing: -.05em;
+        }
+        .section-intro { margin-top: .75rem; color: var(--muted); }
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
             gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
         }
-
-        .download-btn {
-            padding: 0.7rem 1.5rem;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            font-size: 0.9rem;
+        .app-card {
+            position: relative;
+            overflow: hidden;
+            grid-column: span 6;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            min-height: 330px;
+            padding: 2rem;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 1rem;
+            transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
         }
-
-        .app-store {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #ffffff;
+        .app-card.featured { min-height: 390px; background: linear-gradient(145deg, var(--surface-2), var(--surface) 70%); }
+        .app-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(249, 115, 22, .72);
+            box-shadow: 0 24px 48px rgba(0, 0, 0, .22);
         }
-
-        .google-play {
-            background: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
+        .app-icon {
+            width: 76px;
+            height: 76px;
+            margin-bottom: 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, .28);
         }
-
-        .download-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        .app-card h3 { margin-bottom: .75rem; font: 600 clamp(1.35rem, 2.3vw, 2rem)/1.15 Sora, sans-serif; }
+        .app-card p { max-width: 34rem; margin-bottom: 1.5rem; color: var(--muted); }
+        .app-badge {
+            display: inline-flex;
+            margin: -.25rem 0 1rem;
+            padding: .28rem .7rem;
+            border-radius: 999px;
+            color: var(--accent-light);
+            background: rgba(249, 115, 22, .1);
+            border: 1px solid rgba(253, 186, 116, .3);
+            font-size: .74rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
         }
-
-        .learn-more {
-            display: inline-block;
-            margin-top: 1rem;
-            color: #8a9bff;
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: color 0.2s ease, transform 0.2s ease;
+        .download-buttons {
             position: relative;
             z-index: 2;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: .65rem;
+            margin-top: auto;
         }
-
-        .learn-more:hover {
-            color: #b8c2ff;
-            transform: translateX(4px);
+        .download-btn {
+            min-height: 44px;
+            padding: .7rem 1rem;
+            border: 1px solid var(--line);
+            border-radius: .55rem;
+            color: #fff;
+            text-decoration: none;
+            font-size: .9rem;
+            font-weight: 600;
+            transition: transform .2s ease, background .2s ease;
         }
-
-        .app-card.clickable {
-            cursor: pointer;
+        .download-btn:hover { transform: translateY(-2px); }
+        .app-store { background: var(--accent); border-color: var(--accent); }
+        .google-play { background: transparent; }
+        .learn-more {
+            position: relative;
+            z-index: 2;
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--accent-light);
+            text-decoration: none;
+            font-size: .85rem;
+            font-weight: 600;
         }
-
         .card-link-overlay {
             position: absolute;
             inset: 0;
             z-index: 1;
-            text-indent: -9999px;
             overflow: hidden;
+            text-indent: -9999px;
         }
 
-        .app-card .download-btn {
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Contact Section */
-        .contact-section {
-            padding: 5rem 0;
-            background-color: #121212;
-        }
-
-        .contact-content {
-            text-align: center;
-        }
-
+        .contact-section { padding: 5.5rem 0; background: var(--surface); }
+        .contact-content { max-width: 760px; }
+        .contact-content p { margin-top: 1rem; color: var(--muted); }
         .contact-email {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            color: #ffffff;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: inline-flex;
+            align-items: center;
+            min-height: 48px;
             margin-top: 2rem;
-        }
-
-        .contact-email:hover {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-        }
-
-        /* Footer */
-        .footer {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d1b69 100%);
-            color: #b0b0b0;
-            text-align: center;
-            padding: 2rem 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-weight: 300;
-        }
-
-        .footer p {
-            margin: 0;
-            font-size: 0.9rem;
-        }
-
-        .footer-links {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links a {
-            color: #b0b0b0;
+            padding: .8rem 1rem;
+            border: 1px solid var(--line);
+            border-radius: .55rem;
+            color: #fff;
             text-decoration: none;
-            margin: 0 0.6rem;
-            font-size: 0.9rem;
-            transition: color 0.2s ease;
+            transition: transform .2s ease, background .2s ease;
         }
-
-        .footer-links a:hover {
-            color: #8a9bff;
+        .contact-email:hover { transform: translateY(-2px); background: var(--accent); }
+        .footer {
+            padding: 2rem;
+            background: var(--ink);
+            border-top: 1px solid var(--line);
+            color: var(--muted);
+            text-align: center;
+            font-size: .9rem;
         }
+        .footer-links { margin-bottom: 1rem; }
+        .footer-links a { margin: 0 .6rem; color: var(--muted); text-decoration: none; }
+        .footer-links a:hover { color: var(--accent-light); }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
+            .nav-container, .container { padding-left: 1rem; padding-right: 1rem; }
+            .mobile-menu { display: flex; }
             .nav-links {
                 display: none;
                 position: absolute;
@@ -359,135 +330,79 @@
                 right: 0;
                 flex-direction: column;
                 gap: 0;
-                background: rgba(18, 18, 18, 0.98);
-                backdrop-filter: blur(10px);
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-                padding: 1rem 0;
                 margin: 0;
+                padding: 1rem 0;
+                background: var(--surface);
+                border-bottom: 1px solid var(--line);
             }
-
-            .nav-links.open {
-                display: flex;
-            }
-
-            .nav-links li {
-                width: 100%;
-                text-align: center;
-            }
-
-            .nav-links li a {
-                display: block;
-                padding: 0.85rem 1rem;
-                width: 100%;
-            }
-
-            .nav-links a::after {
-                display: none;
-            }
-
-            .mobile-menu {
-                display: flex;
-            }
-
-            .mobile-menu.open span:nth-child(1) {
-                transform: translateY(9px) rotate(45deg);
-            }
-
-            .mobile-menu.open span:nth-child(2) {
-                opacity: 0;
-            }
-
-            .mobile-menu.open span:nth-child(3) {
-                transform: translateY(-9px) rotate(-45deg);
-            }
-
-            .apps-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .download-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .download-btn {
-                width: 100%;
-                max-width: 200px;
-            }
-
-            .nav-container {
-                padding: 0 1rem;
-            }
-
-            .container {
-                padding: 0 1rem;
-            }
+            .nav-links.open { display: flex; }
+            .nav-links li { width: 100%; text-align: center; }
+            .nav-links li a { display: block; width: 100%; padding: .85rem 1rem; }
+            .nav-links a::after { display: none; }
+            .studio-hero .container { grid-template-columns: 1fr; }
+            .icon-cluster { min-height: 210px; max-width: 380px; }
+            .app-card, .app-card.featured { grid-column: 1 / -1; min-height: 0; }
+            .download-buttons { width: 100%; }
         }
-
         @media (max-width: 480px) {
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .app-card {
-                padding: 1.5rem;
-            }
+            .download-buttons { flex-direction: column; }
+            .download-btn { width: 100%; text-align: center; }
         }
-        /* 2026 product-studio refresh */
-        :root { --ink:#0D1016; --surface:#171C26; --surface-2:#202738; --text:#F4F7FB; --muted:#A9B2C3; --accent:#F97316; --line:rgba(148,163,184,.24); }
-        html { scroll-padding-top: 5.5rem; }
-        body { font-family: Manrope, sans-serif; background:var(--ink); color:var(--text); }
-        body::before { content:""; position:fixed; inset:0; pointer-events:none; opacity:.035; z-index:5; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E"); }
-        .skip-link { position:absolute; left:1rem; top:-4rem; z-index:2000; padding:.75rem 1rem; color:#fff; background:var(--accent); border-radius:.5rem; } .skip-link:focus { top:1rem; }
-        .navbar { background:rgba(13,16,22,.82); border-color:var(--line); } .nav-container,.container { max-width:1280px; } .logo,.section-title { font-family:Sora,sans-serif; background:none; -webkit-text-fill-color:currentColor; color:var(--text); }
-        .nav-links a:hover,.learn-more:hover { color:#fdba74; } .nav-links a::after { background:var(--accent); }
-        .mobile-menu { border:0; background:transparent; padding:.5rem; min-width:44px; min-height:44px; align-items:center; justify-content:center; } .mobile-menu:focus-visible,.nav-links a:focus-visible,a:focus-visible { outline:3px solid #fdba74; outline-offset:4px; border-radius:4px; }
-        .studio-hero { position:relative; overflow:hidden; padding:clamp(8rem,16vw,12rem) 0 5.5rem; background:radial-gradient(circle at 80% 18%,rgba(249,115,22,.18),transparent 28%); }
-        .studio-hero .container { display:grid; grid-template-columns:1.1fr .9fr; gap:3rem; align-items:center; } .eyebrow { color:#fdba74; font-size:.75rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
-        h1 { max-width:760px; margin:.85rem 0 1.25rem; font:600 clamp(3rem,7vw,6.5rem)/.98 Sora,sans-serif; letter-spacing:-.07em; text-wrap:balance; } .hero-copy { max-width:36rem; color:var(--muted); font-size:1.1rem; }
-        .hero-cta { display:inline-flex; margin-top:2rem; align-items:center; justify-content:center; min-height:48px; padding:.8rem 1.2rem; border-radius:.6rem; color:#fff; background:var(--accent); font-weight:700; text-decoration:none; transition:transform .2s,background .2s; } .hero-cta:hover { transform:translateY(-2px); background:#fb923c; }
-        .icon-cluster { min-height:310px; position:relative; } .icon-cluster img { position:absolute; width:clamp(66px,9vw,118px); border-radius:24%; box-shadow:0 24px 40px rgba(0,0,0,.35); } .icon-cluster img:nth-child(1){left:4%;top:6%}.icon-cluster img:nth-child(2){right:4%;top:0}.icon-cluster img:nth-child(3){left:32%;top:25%}.icon-cluster img:nth-child(4){right:18%;bottom:0}.icon-cluster img:nth-child(5){left:9%;bottom:8%}.icon-cluster img:nth-child(6){right:38%;bottom:13%}
-        .apps-section { padding:5.5rem 0 7rem; background:var(--ink); } .section-heading { max-width:600px; margin-bottom:3rem; } .section-title { text-align:left; margin:0; font-size:clamp(2rem,4vw,3.4rem); letter-spacing:-.05em; } .section-intro { margin-top:.75rem; color:var(--muted); }
-        .apps-grid { grid-template-columns:repeat(12,1fr); gap:1rem; margin:0; } .app-card { grid-column:span 6; display:flex; flex-direction:column; align-items:flex-start; min-height:330px; padding:2rem; text-align:left; background:var(--surface); border:1px solid var(--line); border-radius:1rem; } .app-card.featured { grid-column:span 6; min-height:390px; background:linear-gradient(145deg,#202738,#171C26 70%); } .app-card::before { display:none; } .app-card:hover { transform:translateY(-4px); box-shadow:0 24px 48px rgba(0,0,0,.22); border-color:rgba(249,115,22,.72); }
-        .app-icon { width:76px; height:76px; margin:0 0 1.5rem; box-shadow:0 12px 28px rgba(0,0,0,.28); } .app-card h3 { font:600 clamp(1.35rem,2.3vw,2rem)/1.15 Sora,sans-serif; margin:0 0 .75rem; } .app-card p { color:var(--muted); margin:0 0 1.5rem; font-weight:400; max-width:34rem; } .download-buttons { margin-top:auto; justify-content:flex-start; gap:.65rem; } .download-btn { min-height:44px; border-radius:.55rem; padding:.7rem 1rem; } .app-store { background:var(--accent); } .google-play { background:transparent; border-color:var(--line); } .learn-more { color:#fdba74; margin-top:1rem; }
-        .contact-section { background:var(--surface); padding:5.5rem 0; } .contact-content { text-align:left; max-width:760px; } .contact-email { min-height:48px; padding:.8rem 1rem; border-radius:.55rem; background:transparent; border-color:var(--line); } .contact-email:hover { background:var(--accent); box-shadow:none; transform:translateY(-2px); } .footer { background:var(--ink); border-color:var(--line); }
-        @media (max-width:768px){ .studio-hero .container{grid-template-columns:1fr}.icon-cluster{min-height:210px;max-width:380px}.apps-grid,.app-card,.app-card.featured{grid-column:1/-1}.app-card{min-height:0}.mobile-menu{display:flex}.nav-links{background:var(--surface)} }
-        @media (prefers-reduced-motion:reduce){ *,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important;} }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+        }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <a class="skip-link" href="#main-content">Skip to content</a>
+
     <header>
-    <nav class="navbar" aria-label="Primary navigation">
-        <div class="nav-container">
-            <a class="logo" href="index.html" aria-label="Fireshark Tech home">Fireshark Tech</a>
-            <ul class="nav-links">
-                <li><a href="#home">Our Apps</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <button class="mobile-menu" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-links">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </nav>
+        <nav class="navbar" aria-label="Primary navigation">
+            <div class="nav-container">
+                <a class="logo" href="index.html" aria-label="Fireshark Tech home">Fireshark Tech</a>
+                <ul class="nav-links" id="primary-links">
+                    <li><a href="#home">Our Apps</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <button class="mobile-menu" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-links">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
     </header>
 
-    <main id="main-content">
-    <section class="studio-hero" aria-labelledby="page-title">
-        <div class="container"><div><p class="eyebrow">Independent app studio</p><h1 id="page-title">Useful apps, made with focus.</h1><p class="hero-copy">Fireshark builds polished tools for the moments people reach for their phones, browsers, and everyday routines.</p><a class="hero-cta" href="#home">Explore our apps <span aria-hidden="true">↓</span></a></div><div class="icon-cluster" aria-label="Fireshark app icons"><img src="image/app_icon/sony_remote_icon.png" alt="SonLink app icon"><img src="image/app_icon/supermote_icon.png" alt="SuperMote app icon"><img src="image/app_icon/goodbus_icon.png" alt="Goodbus app icon"><img src="image/app_icon/ponpon_math_icon.png" alt="Pon Pon Math app icon"><img src="image/app_icon/twindle_icon.png" alt="Twindle app icon"><img src="image/app_icon/hong_kong_weather_icon.png" alt="Hong Kong Weather app icon"></div></div>
-    </section>
-    <section id="home" class="apps-section">
-        <div class="container">
-            <div class="section-heading"><p class="eyebrow">The portfolio</p><h2 class="section-title">Made for everyday use.</h2><p class="section-intro">Focused experiences for your home, your commute, and your family.</p></div>
-            <div class="apps-grid">
+    <main id="main-content" tabindex="-1">
+        <section class="studio-hero" aria-labelledby="page-title">
+            <div class="container">
+                <div>
+                    <p class="eyebrow">Independent app studio</p>
+                    <h1 id="page-title">Useful apps, made with focus.</h1>
+                    <p class="hero-copy">Fireshark builds polished tools for the moments people reach for their phones, browsers, and everyday routines.</p>
+                    <a class="hero-cta" href="#home">Explore our apps <span aria-hidden="true">↓</span></a>
+                </div>
+                <div class="icon-cluster" aria-label="Fireshark app icons">
+                    <img src="image/app_icon/sony_remote_icon.png" alt="SonLink app icon">
+                    <img src="image/app_icon/supermote_icon.png" alt="SuperMote app icon">
+                    <img src="image/app_icon/goodbus_icon.png" alt="Goodbus app icon">
+                    <img src="image/app_icon/ponpon_math_icon.png" alt="Pon Pon Math app icon">
+                    <img src="image/app_icon/twindle_icon.png" alt="Twindle app icon">
+                    <img src="image/app_icon/hong_kong_weather_icon.png" alt="Hong Kong Weather app icon">
+                </div>
+            </div>
+        </section>
 
-                     <!-- App 1: SonLink TV Remote -->
-                     <article class="app-card featured clickable">
+        <section id="home" class="apps-section">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow">The portfolio</p>
+                    <h2 class="section-title">Made for everyday use.</h2>
+                    <p class="section-intro">Focused experiences for your home, your commute, and your family.</p>
+                </div>
+                <div class="apps-grid">
+                    <article class="app-card featured">
                         <a href="apps/sonlink/index.html" class="card-link-overlay" aria-label="Learn more about SonLink">SonLink details</a>
-                        <img src="image/app_icon/sony_remote_icon.png" alt="SonLink TV Remote App Icon" class="app-icon">
+                        <img src="image/app_icon/sony_remote_icon.png" alt="SonLink TV Remote app icon" class="app-icon">
                         <h3>SonLink: Wi-Fi TV Remote</h3>
                         <p>Control a compatible TV over local Wi-Fi with power, volume, navigation, typing and app shortcuts.</p>
                         <div class="download-buttons">
@@ -497,78 +412,77 @@
                         <a href="apps/sonlink/index.html" class="learn-more">Learn more →</a>
                     </article>
 
-                <!-- App 2: Twindle -->
-                <article class="app-card clickable"><a href="https://twindle.fireshark.tech/" class="card-link-overlay" aria-label="Open Twindle" target="_blank" rel="noopener noreferrer">Twindle</a><img src="image/app_icon/twindle_icon.png" alt="Twindle app icon" class="app-icon"><h3>Twindle</h3><p>A daily twin-equation math puzzle for web, iOS, and Android.</p><div class="download-buttons"><a href="https://twindle.fireshark.tech/" class="download-btn app-store" target="_blank" rel="noopener noreferrer">Web App</a><a href="https://apps.apple.com/us/app/twindle-daily-math-puzzle/id6779842276" class="download-btn app-store" target="_blank" rel="noopener noreferrer">App Store</a><a href="https://play.google.com/store/apps/details?id=com.firesharkhk.twindle" class="download-btn google-play" target="_blank" rel="noopener noreferrer">Google Play</a></div></article>
-
-                <!-- App 3: Goodbus -->
-                <article class="app-card">
-                    <img src="image/app_icon/goodbus_icon.png" alt="Goodbus App Icon" class="app-icon">
-                    <h3>Goodbus</h3>
-                    <p>Hong Kong bus arrival time app that helps you easily track bus schedules and timing information.</p>
-                    <div class="download-buttons">
-                        <a href="https://apps.apple.com/hk/app/goodbus-%E9%A6%99%E6%B8%AF%E5%B7%B4%E5%A3%AB%E5%88%B0%E7%AB%99%E6%99%82%E9%96%93/id1573111465" class="download-btn app-store" target="_blank" rel="noopener noreferrer">App Store</a>
-                        <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.goodbus" class="download-btn google-play" target="_blank" rel="noopener noreferrer">Google Play</a>
-                    </div>
+                    <article class="app-card">
+                        <a href="https://twindle.fireshark.tech/" class="card-link-overlay" aria-label="Open Twindle" target="_blank" rel="noopener noreferrer">Twindle</a>
+                        <img src="image/app_icon/twindle_icon.png" alt="Twindle app icon" class="app-icon">
+                        <h3>Twindle</h3>
+                        <p>A daily twin-equation math puzzle for web, iOS, and Android.</p>
+                        <div class="download-buttons">
+                            <a href="https://twindle.fireshark.tech/" class="download-btn app-store" target="_blank" rel="noopener noreferrer">Web App</a>
+                            <a href="https://apps.apple.com/us/app/twindle-daily-math-puzzle/id6779842276" class="download-btn app-store" target="_blank" rel="noopener noreferrer">App Store</a>
+                            <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.twindle" class="download-btn google-play" target="_blank" rel="noopener noreferrer">Google Play</a>
+                        </div>
                     </article>
 
-                <!-- App 4: SuperMote -->
-                <article class="app-card featured clickable">
-                    <a href="apps/supermote/index.html" class="card-link-overlay" aria-label="Learn more about SuperMote">SuperMote details</a>
-                    <img src="image/app_icon/supermote_icon.png" alt="SuperMote TV Remote App Icon" class="app-icon">
-                    <h3>SuperMote: TV Remote Control</h3>
-                    <p>Universal Wi-Fi remote for many compatible smart TVs and streaming devices — auto-discover, pair in seconds, and control multiple TVs from one clean interface.</p>
-                    <div class="download-buttons">
-                        <a href="https://apps.apple.com/hk/app/superremote-tv-remote/id6743916971" class="download-btn app-store" target="_blank" rel="noopener noreferrer">App Store</a>
-                        <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.remotex.smarttvremote" class="download-btn google-play" target="_blank" rel="noopener noreferrer">Google Play</a>
-                    </div>
-                    <a href="apps/supermote/index.html" class="learn-more">Learn more →</a>
-                </article>
+                    <article class="app-card">
+                        <img src="image/app_icon/goodbus_icon.png" alt="Goodbus app icon" class="app-icon">
+                        <h3>Goodbus</h3>
+                        <p>Hong Kong bus arrival time app that helps you easily track bus schedules and timing information.</p>
+                        <div class="download-buttons">
+                            <a href="https://apps.apple.com/hk/app/goodbus-%E9%A6%99%E6%B8%AF%E5%B7%B4%E5%A3%AB%E5%88%B0%E7%AB%99%E6%99%82%E9%96%93/id1573111465" class="download-btn app-store" target="_blank" rel="noopener noreferrer">App Store</a>
+                            <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.goodbus" class="download-btn google-play" target="_blank" rel="noopener noreferrer">Google Play</a>
+                        </div>
+                    </article>
 
-                <!-- App 5: Hong Kong Weather -->
-                <article class="app-card clickable">
-                    <a href="apps/hong-kong-weather/index.html" class="card-link-overlay" aria-label="Learn more about Hong Kong Weather">Hong Kong Weather details</a>
-                    <img src="image/app_icon/hong_kong_weather_icon.png" alt="Hong Kong Weather Extension Icon" class="app-icon">
-                    <h3>Hong Kong Weather</h3>
-                    <span class="app-badge">Browser Extension</span>
-                    <p>Hong Kong weather warning browser extension with current weather, radar images, lightning location, forecasts, and toolbar badge updates.</p>
-                    <div class="download-buttons">
-                        <a href="https://chromewebstore.google.com/detail/%E9%A6%99%E6%B8%AF%E5%A4%A9%E6%B0%A3%E8%AD%A6%E5%A0%B1/chmlbbhplbepjboepkcngfnmbellhfge" class="download-btn app-store" target="_blank" rel="noopener noreferrer">Chrome Web Store</a>
-                        <a href="https://addons.mozilla.org/zh-TW/firefox/addon/%E9%A6%99%E6%B8%AF%E5%A4%A9%E6%B0%A3%E9%A0%90%E5%A0%B1-hong-kong-weather/" class="download-btn google-play" target="_blank" rel="noopener noreferrer">Firefox Add-ons</a>
-                        <a href="https://microsoftedge.microsoft.com/addons/detail/%E9%A6%99%E6%B8%AF%E5%A4%A9%E6%B0%A3%E8%AD%A6%E5%A0%B1/koemdfkhpkadjclicmmjoaglaapcdlco" class="download-btn google-play" target="_blank" rel="noopener noreferrer">Edge Add-ons</a>
-                    </div>
-                    <a href="apps/hong-kong-weather/index.html" class="learn-more">Learn more →</a>
-                </article>
+                    <article class="app-card featured">
+                        <a href="apps/supermote/index.html" class="card-link-overlay" aria-label="Learn more about SuperMote">SuperMote details</a>
+                        <img src="image/app_icon/supermote_icon.png" alt="SuperMote TV Remote app icon" class="app-icon">
+                        <h3>SuperMote: TV Remote Control</h3>
+                        <p>Universal Wi-Fi remote for many compatible smart TVs and streaming devices — auto-discover, pair in seconds, and control multiple TVs from one clean interface.</p>
+                        <div class="download-buttons">
+                            <a href="https://apps.apple.com/hk/app/superremote-tv-remote/id6743916971" class="download-btn app-store" target="_blank" rel="noopener noreferrer">App Store</a>
+                            <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.remotex.smarttvremote" class="download-btn google-play" target="_blank" rel="noopener noreferrer">Google Play</a>
+                        </div>
+                        <a href="apps/supermote/index.html" class="learn-more">Learn more →</a>
+                    </article>
 
-                <!-- App 6: Pon Pon Math -->
-                <article class="app-card">
-                    <img src="image/app_icon/ponpon_math_icon.png" alt="Pon Pon Math App Icon" class="app-icon">
-                    <h3>Pon Pon Math</h3>
-                    <p>Fun math game that helps children learn mathematics through gameplay and improve calculation skills.</p>
-                    <div class="download-buttons">
-                        <a href="https://apps.apple.com/hk/app/pon-pon-math/id6479554927" class="download-btn app-store" target="_blank" rel="noopener noreferrer">App Store</a>
-<!--                         <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.ponponmath" class="download-btn google-play" target="_blank" rel="noopener noreferrer">Google Play</a> -->
-                    </div>
-                </article>
+                    <article class="app-card">
+                        <a href="apps/hong-kong-weather/index.html" class="card-link-overlay" aria-label="Learn more about Hong Kong Weather">Hong Kong Weather details</a>
+                        <img src="image/app_icon/hong_kong_weather_icon.png" alt="Hong Kong Weather extension icon" class="app-icon">
+                        <h3>Hong Kong Weather</h3>
+                        <span class="app-badge">Browser Extension</span>
+                        <p>Hong Kong weather warning browser extension with current weather, radar images, lightning location, forecasts, and toolbar badge updates.</p>
+                        <div class="download-buttons">
+                            <a href="https://chromewebstore.google.com/detail/%E9%A6%99%E6%B8%AF%E5%A4%A9%E6%B0%A3%E8%AD%A6%E5%A0%B1/chmlbbhplbepjboepkcngfnmbellhfge" class="download-btn app-store" target="_blank" rel="noopener noreferrer">Chrome Web Store</a>
+                            <a href="https://addons.mozilla.org/zh-TW/firefox/addon/%E9%A6%99%E6%B8%AF%E5%A4%A9%E6%B0%A3%E9%A0%90%E5%A0%B1-hong-kong-weather/" class="download-btn google-play" target="_blank" rel="noopener noreferrer">Firefox Add-ons</a>
+                            <a href="https://microsoftedge.microsoft.com/addons/detail/%E9%A6%99%E6%B8%AF%E5%A4%A9%E6%B0%A3%E8%AD%A6%E5%A0%B1/koemdfkhpkadjclicmmjoaglaapcdlco" class="download-btn google-play" target="_blank" rel="noopener noreferrer">Edge Add-ons</a>
+                        </div>
+                        <a href="apps/hong-kong-weather/index.html" class="learn-more">Learn more →</a>
+                    </article>
 
+                    <article class="app-card">
+                        <img src="image/app_icon/ponpon_math_icon.png" alt="Pon Pon Math app icon" class="app-icon">
+                        <h3>Pon Pon Math</h3>
+                        <p>Fun math game that helps children learn mathematics through gameplay and improve calculation skills.</p>
+                        <div class="download-buttons">
+                            <a href="https://apps.apple.com/hk/app/pon-pon-math/id6479554927" class="download-btn app-store" target="_blank" rel="noopener noreferrer">App Store</a>
+                        </div>
+                    </article>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <div class="contact-content">
-                <h2 class="section-title">Contact Us</h2>
-                <p>For any collaboration or technical inquiries, feel free to reach out.</p>
-                <a href="mailto:hello@fireshark.tech" class="contact-email">hello@fireshark.tech</a>
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <div class="contact-content">
+                    <h2 class="section-title">Contact Us</h2>
+                    <p>For any collaboration or technical inquiries, feel free to reach out.</p>
+                    <a href="mailto:hello@fireshark.tech" class="contact-email">hello@fireshark.tech</a>
+                </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
+        </section>
     </main>
+
     <footer class="footer">
         <div class="footer-links">
             <a href="legal/terms-of-use.html">Terms of Use</a>
@@ -579,73 +493,77 @@
     </footer>
 
     <script>
-        // Smooth scrolling for navigation links
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+            anchor.addEventListener('click', function (event) {
+                const href = this.getAttribute('href');
+                const target = document.querySelector(href);
+                if (!target) return;
+
+                event.preventDefault();
+                const isSkipLink = this.classList.contains('skip-link');
+                target.scrollIntoView({
+                    behavior: isSkipLink || prefersReducedMotion.matches ? 'auto' : 'smooth',
+                    block: 'start'
+                });
+
+                if (isSkipLink) {
+                    target.focus({ preventScroll: true });
                 }
             });
         });
 
-        // Mobile menu toggle
         const mobileMenu = document.querySelector('.mobile-menu');
         const navLinks = document.querySelector('.nav-links');
 
-        mobileMenu.addEventListener('click', () => {
-            navLinks.classList.toggle('open');
-            mobileMenu.classList.toggle('open');
-            const isOpen = navLinks.classList.contains('open');
-            mobileMenu.setAttribute('aria-expanded', isOpen);
+        const setMenuOpen = (isOpen) => {
+            navLinks.classList.toggle('open', isOpen);
+            mobileMenu.classList.toggle('open', isOpen);
+            mobileMenu.setAttribute('aria-expanded', String(isOpen));
             mobileMenu.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
-        });
-        navLinks.id = 'primary-links';
-        document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && navLinks.classList.contains('open')) mobileMenu.click(); });
+        };
 
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('open');
-                mobileMenu.classList.remove('open');
-            });
+        mobileMenu.addEventListener('click', () => {
+            setMenuOpen(!navLinks.classList.contains('open'));
         });
 
-        // Add scroll effect to navbar
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 100) {
-                navbar.style.background = 'rgba(18, 18, 18, 0.98)';
-            } else {
-                navbar.style.background = 'rgba(18, 18, 18, 0.95)';
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && navLinks.classList.contains('open')) {
+                setMenuOpen(false);
+                mobileMenu.focus();
             }
         });
 
-        // Animate elements on scroll (intersection observer)
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Apply animation to app cards
-        document.querySelectorAll('.app-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(card);
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => setMenuOpen(false));
         });
+
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            navbar.style.background = window.scrollY > 100
+                ? 'rgba(13, 16, 22, 0.98)'
+                : 'rgba(13, 16, 22, 0.82)';
+        }, { passive: true });
+
+        if (!prefersReducedMotion.matches) {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+            document.querySelectorAll('.app-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity .6s ease, transform .6s ease';
+                observer.observe(card);
+            });
+        }
     </script>
 </body>
 </html>
