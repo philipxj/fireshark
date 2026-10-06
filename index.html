@@ -272,23 +272,6 @@
             transform: translateX(4px);
         }
 
-        .app-card.clickable {
-            cursor: pointer;
-        }
-
-        .card-link-overlay {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            text-indent: -9999px;
-            overflow: hidden;
-        }
-
-        .app-card .download-btn {
-            position: relative;
-            z-index: 2;
-        }
-
         /* Contact Section */
         .contact-section {
             padding: 5rem 0;
@@ -433,107 +416,188 @@
                 padding: 1.5rem;
             }
         }
+
+        /* Keyboard access, text reflow and quiet, immediate feedback. */
+        body { overflow-x: visible; font-family: 'Inter', system-ui, sans-serif; }
+        :focus-visible { outline: 3px solid #b9d9ff; outline-offset: 5px; }
+        a, button, summary { -webkit-tap-highlight-color: rgba(185,217,255,.25); }
+        a:active, button:active, summary:active { filter: brightness(1.2); }
+        section, [id] { scroll-margin-top: 7rem; }
+        .skip-link { position: fixed; top: .75rem; left: .75rem; z-index: 2000; padding: .75rem 1rem; background: #fff; color: #121212; transform: translateY(-200%); }
+        .skip-link:focus { transform: none; }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+            .app-card, .feature, .why-card, .brand-card, .step, .compat-item { opacity: 1 !important; transform: none !important; }
+        }
+
+        .mobile-menu { width: 44px; height: 44px; padding: 7px 9px; border: 0; border-radius: 8px; background: transparent; justify-content: center; align-items: center; }
+        .logo { color: #a7b5ff; background: none; -webkit-text-fill-color: currentColor; }
+        .brand-intro { max-width: 720px; margin: 0 auto 4rem; text-align: center; }
+        .intro-eyebrow { color: #a7b5ff; font-weight: 600; margin-bottom: 1rem; }
+        .brand-intro h1 { font-size: clamp(2.25rem, 6vw, 4rem); line-height: 1.12; letter-spacing: -.035em; margin-bottom: 1.25rem; }
+        .brand-intro p:not(.intro-eyebrow) { color: #c2c2cc; font-size: 1.1rem; max-width: 540px; margin: auto; }
+        .intro-link { display: inline-block; padding: .75rem; margin-top: 1rem; color: #a7b5ff; text-decoration: none; }
+        .group-title { font-size: 1.75rem; letter-spacing: -.02em; margin-top: 3rem; }
+        .group-copy { color: #bfc0ca; max-width: 720px; margin-top: .5rem; }
+        .apps-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 1.5rem; }
+        .app-card { display: flex; flex-direction: column; text-align: left; padding: 2rem; overflow: visible; min-width: 0; }
+        .app-card::before { display: none; }
+        .app-card:hover { transform: none; box-shadow: none; border-color: rgba(255,255,255,.2); }
+        .app-icon { margin-left: 0; }
+        .app-badge { margin-left: 0; }
+        .card-actions { margin-top: auto; padding-top: .5rem; }
+        .learn-more, .platform-note { margin: 0 0 1rem; min-height: 44px; display: flex; align-items: center; }
+        .learn-more { font-size: 1rem; color: #a7b5ff; }
+        .app-card .platform-note { font-size: .9rem; color: #bfc0ca; margin-bottom: 1rem; }
+        .download-buttons { justify-content: flex-start; gap: .6rem; }
+        .download-btn { text-align: center; padding: .65rem 1rem; min-height: 44px; }
+        .download-btn.app-store { background: #414f99; }
+        .nav-links a:hover { color: #a7b5ff; }
+        @media (max-width: 768px) {
+            .apps-grid { grid-template-columns: 1fr; }
+            .download-buttons { flex-direction: row; align-items: stretch; }
+            .download-btn { width: auto; max-width: none; }
+            .app-card { padding: 1.5rem; }
+        }
+
+        /* Allow the layout to grow with larger text without page overflow. */
+        h1, h2, h3, p, a { overflow-wrap: anywhere; }
+        .contact-email { max-width: 100%; }
+        .hero-content, .hero-container > *, .source-layout > *, .support-item, .why-card, .feature, .compat-item { min-width: 0; }
+        .hero-content, .hero-eyebrow, .hero-buttons, .btn { max-width: 100%; }
+        .nav-cta { flex-shrink: 1; text-align: center; }
+        .nav-container { flex-wrap: wrap; }
+        .gallery-item { min-width: 0; }
+        .gallery-item img, .hero-mockup img { max-width: 100%; }
+        @media (max-width: 600px) {
+            .container, .hero-container { padding-left: 1rem; padding-right: 1rem; }
+            .why-grid, .gallery, .features-grid, .compat-list, .brands-grid, .support-panel { grid-template-columns: minmax(0, 1fr); }
+            .why-card, .feature, .support-item, .compat-card { padding: 1rem; }
+            .hero-brands { gap: .75rem; }
+            .brand-chip { padding: .75rem; }
+            .hero-eyebrow { white-space: normal; }
+            .hero-buttons .btn { justify-content: center; }
+            .nav-cta { padding: .5rem .75rem; }
+        }
     </style>
 </head>
 <body>
+    <a href="#main" class="skip-link">Skip to content</a>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">Fireshark Tech</div>
-            <ul class="nav-links">
+            <button type="button" class="mobile-menu" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </button>
+            <ul class="nav-links" id="primary-navigation">
                 <li><a href="#home">Our Apps</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <div class="mobile-menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+
         </div>
     </nav>
 
+    <main id="main">
     <!-- Apps Portfolio Section -->
     <section id="home" class="apps-section" style="padding-top: 8rem;">
         <div class="container">
-            <h2 class="section-title">Our Applications</h2>
+            <div class="brand-intro">
+                <p class="intro-eyebrow">Fireshark Tech</p>
+                <h1>Useful apps.<br>A little less friction.</h1>
+                <p>Tools for everyday life, TV control and playful learning. Find the app that fits your day.</p>
+                <a href="#tv-remotes" class="intro-link">Explore our apps ↓</a>
+            </div>
+            <h2 class="group-title" id="tv-remotes">TV remotes</h2>
+            <p class="group-copy">SonLink keeps TV control focused. SuperMote brings multiple supported TV platforms into one app. Check each app’s compatibility before downloading.</p>
             <div class="apps-grid">
-
-                     <!-- App 1: SonLink TV Remote -->
-                     <div class="app-card clickable">
-                        <a href="apps/sonlink/index.html" class="card-link-overlay" aria-label="Learn more about SonLink">SonLink details</a>
+<!-- App 1: SonLink TV Remote -->
+                <div class="app-card">
                         <img src="image/app_icon/sony_remote_icon.png" alt="SonLink TV Remote App Icon" class="app-icon">
                         <h3>SonLink: Wi-Fi TV Remote</h3>
                         <p>Control a compatible TV over local Wi-Fi with power, volume, navigation, typing and app shortcuts.</p>
+                        <div class="card-actions">
+                        <a href="apps/sonlink/index.html" class="learn-more">Explore SonLink →</a>
                         <div class="download-buttons">
-                            <a href="https://apps.apple.com/hk/app/sonlink-tv-remote/id6474549094" class="download-btn app-store" target="_blank">App Store</a>
-                            <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.sony.bravia.tv.remote" class="download-btn google-play" target="_blank">Google Play</a>
+                            <a href="https://apps.apple.com/hk/app/sonlink-tv-remote/id6474549094" class="download-btn app-store" target="_blank" rel="noopener">App Store</a>
+                            <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.sony.bravia.tv.remote" class="download-btn google-play" target="_blank" rel="noopener">Google Play</a>
                         </div>
-                        <a href="apps/sonlink/index.html" class="learn-more">Learn more →</a>
-                    </div>
-
-                <!-- App 2: Twindle -->
-                <div class="app-card clickable">
-                    <a href="https://twindle.fireshark.tech/" class="card-link-overlay" aria-label="Open Twindle web app" target="_blank" rel="noopener">Twindle web app</a>
-                    <img src="image/app_icon/twindle_icon.png" alt="Twindle App Icon" class="app-icon">
-                    <h3>Twindle</h3>
-                    <p>Daily twin-equation math puzzle for web, iOS, and Android: one sequence of operators, two equations, one target.</p>
-                    <div class="download-buttons">
-                        <a href="https://twindle.fireshark.tech/" class="download-btn app-store" target="_blank" rel="noopener">Web App</a>
-                        <a href="https://apps.apple.com/us/app/twindle-daily-math-puzzle/id6779842276" class="download-btn app-store" target="_blank" rel="noopener">App Store</a>
-                        <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.twindle" class="download-btn google-play" target="_blank" rel="noopener">Google Play</a>
                     </div>
                 </div>
-
-                <!-- App 3: Goodbus -->
+<!-- App 2: SuperMote -->
+                <div class="app-card">
+                    <img src="image/app_icon/supermote_icon.png" alt="SuperMote TV Remote App Icon" class="app-icon">
+                    <h3>SuperMote: TV Remote Control</h3>
+                    <p>Universal Wi-Fi remote for many compatible smart TVs and streaming devices — auto-discover, pair in seconds, and control multiple TVs from one clean interface.</p>
+                    <div class="card-actions">
+                        <a href="apps/supermote/index.html" class="learn-more">Explore SuperMote →</a>
+                        <div class="download-buttons">
+                        <a href="https://apps.apple.com/hk/app/superremote-tv-remote/id6743916971" class="download-btn app-store" target="_blank" rel="noopener">App Store</a>
+                        <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.remotex.smarttvremote" class="download-btn google-play" target="_blank" rel="noopener">Google Play</a>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <h2 class="group-title">Everyday tools</h2>
+            <p class="group-copy">Keep Hong Kong travel and weather information close at hand.</p>
+            <div class="apps-grid">
                 <div class="app-card">
                     <img src="image/app_icon/goodbus_icon.png" alt="Goodbus App Icon" class="app-icon">
                     <h3>Goodbus</h3>
                     <p>Hong Kong bus arrival time app that helps you easily track bus schedules and timing information.</p>
-                    <div class="download-buttons">
-                        <a href="https://apps.apple.com/hk/app/goodbus-%E9%A6%99%E6%B8%AF%E5%B7%B4%E5%A3%AB%E5%88%B0%E7%AB%99%E6%99%82%E9%96%93/id1573111465" class="download-btn app-store" target="_blank">App Store</a>
-                        <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.goodbus" class="download-btn google-play" target="_blank">Google Play</a>
+                    <div class="card-actions">
+                        <p class="platform-note">Download for your device</p>
+                        <div class="download-buttons">
+                        <a href="https://apps.apple.com/hk/app/goodbus-%E9%A6%99%E6%B8%AF%E5%B7%B4%E5%A3%AB%E5%88%B0%E7%AB%99%E6%99%82%E9%96%93/id1573111465" class="download-btn app-store" target="_blank" rel="noopener">App Store</a>
+                        <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.goodbus" class="download-btn google-play" target="_blank" rel="noopener">Google Play</a>
                     </div>
                 </div>
-
-                <!-- App 4: SuperMote -->
-                <div class="app-card clickable">
-                    <a href="apps/supermote/index.html" class="card-link-overlay" aria-label="Learn more about SuperMote">SuperMote details</a>
-                    <img src="image/app_icon/supermote_icon.png" alt="SuperMote TV Remote App Icon" class="app-icon">
-                    <h3>SuperMote: TV Remote Control</h3>
-                    <p>Universal Wi-Fi remote for many compatible smart TVs and streaming devices — auto-discover, pair in seconds, and control multiple TVs from one clean interface.</p>
-                    <div class="download-buttons">
-                        <a href="https://apps.apple.com/hk/app/superremote-tv-remote/id6743916971" class="download-btn app-store" target="_blank">App Store</a>
-                        <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.remotex.smarttvremote" class="download-btn google-play" target="_blank">Google Play</a>
-                    </div>
-                    <a href="apps/supermote/index.html" class="learn-more">Learn more →</a>
                 </div>
-
-                <!-- App 5: Hong Kong Weather -->
-                <div class="app-card clickable">
-                    <a href="apps/hong-kong-weather/index.html" class="card-link-overlay" aria-label="Learn more about Hong Kong Weather">Hong Kong Weather details</a>
+                <div class="app-card">
                     <img src="image/app_icon/hong_kong_weather_icon.png" alt="Hong Kong Weather Extension Icon" class="app-icon">
                     <h3>Hong Kong Weather</h3>
                     <span class="app-badge">Browser Extension</span>
                     <p>Hong Kong weather warning browser extension with current weather, radar images, lightning location, forecasts, and toolbar badge updates.</p>
-                    <div class="download-buttons">
+                    <div class="card-actions">
+                        <a href="apps/hong-kong-weather/index.html" class="learn-more">Explore Hong Kong Weather →</a>
+                        <div class="download-buttons">
                         <a href="https://chromewebstore.google.com/detail/%E9%A6%99%E6%B8%AF%E5%A4%A9%E6%B0%A3%E8%AD%A6%E5%A0%B1/chmlbbhplbepjboepkcngfnmbellhfge" class="download-btn app-store" target="_blank" rel="noopener">Chrome Web Store</a>
                         <a href="https://addons.mozilla.org/zh-TW/firefox/addon/%E9%A6%99%E6%B8%AF%E5%A4%A9%E6%B0%A3%E9%A0%90%E5%A0%B1-hong-kong-weather/" class="download-btn google-play" target="_blank" rel="noopener">Firefox Add-ons</a>
                         <a href="https://microsoftedge.microsoft.com/addons/detail/%E9%A6%99%E6%B8%AF%E5%A4%A9%E6%B0%A3%E8%AD%A6%E5%A0%B1/koemdfkhpkadjclicmmjoaglaapcdlco" class="download-btn google-play" target="_blank" rel="noopener">Edge Add-ons</a>
                     </div>
-                    <a href="apps/hong-kong-weather/index.html" class="learn-more">Learn more →</a>
                 </div>
-
-                <!-- App 6: Pon Pon Math -->
+                </div>
+            </div>
+            <h2 class="group-title">Play &amp; learn</h2>
+            <p class="group-copy">A daily puzzle for you, and playful maths for children.</p>
+            <div class="apps-grid">
+                <div class="app-card">
+                    <img src="image/app_icon/twindle_icon.png" alt="Twindle App Icon" class="app-icon">
+                    <h3>Twindle</h3>
+                    <p>Daily twin-equation math puzzle for web, iOS, and Android: one sequence of operators, two equations, one target.</p>
+                    <div class="card-actions">
+                        <a href="https://twindle.fireshark.tech/" class="learn-more">Play Twindle on the web →</a>
+                        <div class="download-buttons">
+                        <a href="https://apps.apple.com/us/app/twindle-daily-math-puzzle/id6779842276" class="download-btn app-store" target="_blank" rel="noopener">App Store</a>
+                        <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.twindle" class="download-btn google-play" target="_blank" rel="noopener">Google Play</a>
+                    </div>
+                </div>
+                </div>
                 <div class="app-card">
                     <img src="image/app_icon/ponpon_math_icon.png" alt="Pon Pon Math App Icon" class="app-icon">
                     <h3>Pon Pon Math</h3>
                     <p>Fun math game that helps children learn mathematics through gameplay and improve calculation skills.</p>
-                    <div class="download-buttons">
-                        <a href="https://apps.apple.com/hk/app/pon-pon-math/id6479554927" class="download-btn app-store" target="_blank">App Store</a>
-<!--                         <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.ponponmath" class="download-btn google-play" target="_blank">Google Play</a> -->
+                    <div class="card-actions">
+                        <p class="platform-note">Download for your device</p>
+                        <div class="download-buttons">
+                        <a href="https://apps.apple.com/hk/app/pon-pon-math/id6479554927" class="download-btn app-store" target="_blank" rel="noopener">App Store</a>
+<!--                         <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.ponponmath" class="download-btn google-play" target="_blank" rel="noopener">Google Play</a> -->
                     </div>
                 </div>
-
+                </div>
             </div>
         </div>
     </section>
@@ -551,6 +615,7 @@
         </div>
     </section>
 
+    </main>
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-links">
@@ -562,67 +627,44 @@
     </footer>
 
     <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Mobile menu toggle
         const mobileMenu = document.querySelector('.mobile-menu');
         const navLinks = document.querySelector('.nav-links');
-
-        mobileMenu.addEventListener('click', () => {
-            navLinks.classList.toggle('open');
-            mobileMenu.classList.toggle('open');
+        function setMenu(open, restoreFocus = false) {
+            navLinks.classList.toggle('open', open);
+            mobileMenu.classList.toggle('open', open);
+            mobileMenu.setAttribute('aria-expanded', String(open));
+            mobileMenu.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+            if (restoreFocus) mobileMenu.focus();
+        }
+        mobileMenu.addEventListener('click', () => setMenu(mobileMenu.getAttribute('aria-expanded') !== 'true'));
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && mobileMenu.getAttribute('aria-expanded') === 'true') setMenu(false, true);
         });
-
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('open');
-                mobileMenu.classList.remove('open');
-            });
+        navLinks.addEventListener('click', event => {
+            const link = event.target.closest('a');
+            if (!link) return;
+            setMenu(false);
+            const target = document.getElementById(link.hash.slice(1));
+            if (target) { target.tabIndex = -1; target.focus({preventScroll: true}); }
         });
-
-        // Add scroll effect to navbar
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 100) {
-                navbar.style.background = 'rgba(18, 18, 18, 0.98)';
-            } else {
-                navbar.style.background = 'rgba(18, 18, 18, 0.95)';
+        document.addEventListener('click', event => {
+            if (!event.target.closest('.nav-container') && mobileMenu.getAttribute('aria-expanded') === 'true') {
+                setMenu(false, navLinks.contains(document.activeElement));
             }
         });
-
-        // Animate elements on scroll (intersection observer)
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
+        navLinks.addEventListener('focusout', () => {
+            requestAnimationFrame(() => {
+                if (!navLinks.contains(document.activeElement) && document.activeElement !== mobileMenu) setMenu(false);
             });
-        }, observerOptions);
-
-        // Apply animation to app cards
-        document.querySelectorAll('.app-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(card);
+        });
+        let lastFocused = document.activeElement;
+        document.addEventListener('focusin', event => { lastFocused = event.target; });
+        matchMedia('(min-width: 769px)').addEventListener('change', event => {
+            const restoreToNav = event.matches && lastFocused === mobileMenu;
+            const restoreToButton = !event.matches && navLinks.contains(lastFocused);
+            setMenu(false);
+            if (restoreToNav) navLinks.querySelector('a').focus();
+            if (restoreToButton) mobileMenu.focus();
         });
     </script>
 </body>

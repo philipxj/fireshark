@@ -487,20 +487,10 @@
             transition: transform 0.2s ease;
             font-weight: 300;
         }
-        .faq-item.open .faq-q::after {
+        .faq-item[open] .faq-q::after {
             transform: rotate(45deg);
         }
-        .faq-a {
-            max-height: 0;
-            overflow: hidden;
-            color: #b0b0b0;
-            font-weight: 300;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-        }
-        .faq-item.open .faq-a {
-            max-height: 200px;
-            padding-bottom: 1.5rem;
-        }
+        .faq-a { color: #b0b0b0; font-weight: 400; padding-bottom: 1.5rem; }
 
         /* ---- CTA ---- */
         .cta {
@@ -559,16 +549,68 @@
             .phone { transform: scale(0.85); }
             .compat-card { padding: 1.75rem; }
         }
+
+        /* Keyboard access, text reflow and quiet, immediate feedback. */
+        body { overflow-x: visible; font-family: 'Inter', system-ui, sans-serif; }
+        :focus-visible { outline: 3px solid #b9d9ff; outline-offset: 5px; }
+        a, button, summary { -webkit-tap-highlight-color: rgba(185,217,255,.25); }
+        a:active, button:active, summary:active { filter: brightness(1.2); }
+        section, [id] { scroll-margin-top: 7rem; }
+        .skip-link { position: fixed; top: .75rem; left: .75rem; z-index: 2000; padding: .75rem 1rem; background: #fff; color: #121212; transform: translateY(-200%); }
+        .skip-link:focus { transform: none; }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+            .app-card, .feature, .why-card, .brand-card, .step, .compat-item { opacity: 1 !important; transform: none !important; }
+        }
+
+        .faq-q { gap: 1rem; list-style: none; }
+        .faq-q::-webkit-details-marker { display: none; }
+        .faq-q::after { flex-shrink: 0; }
+        .nav-container { gap: 1rem; }
+        .nav-back { min-width: 0; }
+        .nav-cta { flex-shrink: 0; min-height: 44px; display: inline-flex; align-items: center; }
+        .hero-buttons .btn { white-space: normal; text-align: center; }
+        @media (max-width: 360px) { .nav-container { padding-left: 1rem; padding-right: 1rem; } }
+
+        /* Allow the layout to grow with larger text without page overflow. */
+        h1, h2, h3, p, a { overflow-wrap: anywhere; }
+        .contact-email { max-width: 100%; }
+        .hero-content, .hero-container > *, .source-layout > *, .support-item, .why-card, .feature, .compat-item { min-width: 0; }
+        .hero-content, .hero-eyebrow, .hero-buttons, .btn { max-width: 100%; }
+        .nav-cta { flex-shrink: 1; text-align: center; }
+        .nav-container { flex-wrap: wrap; }
+        .gallery-item { min-width: 0; }
+        .gallery-item img, .hero-mockup img { max-width: 100%; }
+        @media (max-width: 600px) {
+            .container, .hero-container { padding-left: 1rem; padding-right: 1rem; }
+            .why-grid, .gallery, .features-grid, .compat-list, .brands-grid, .support-panel { grid-template-columns: minmax(0, 1fr); }
+            .why-card, .feature, .support-item, .compat-card { padding: 1rem; }
+            .hero-brands { gap: .75rem; }
+            .brand-chip { padding: .75rem; }
+            .hero-eyebrow { white-space: normal; }
+            .hero-buttons .btn { justify-content: center; }
+            .nav-cta { padding: .5rem .75rem; }
+        }
+
+        @media (max-width: 600px) {
+            .hero { padding-top: 11rem; }
+            .hero h1 { font-size: 2rem; }
+        }
+            .nav-cta, .btn-primary { background: linear-gradient(135deg, #4453ab, #674190); }
+        footer { color: #a0a0aa; }
     </style>
 </head>
 <body>
+    <a href="#main" class="skip-link">Skip to content</a>
     <nav class="navbar">
         <div class="nav-container">
             <a href="../../index.html" class="nav-back">← Fireshark Tech</a>
-            <a href="https://apps.apple.com/hk/app/sony-tv-remote-bravia-tv/id6474549094" class="nav-cta" target="_blank">Get SonLink</a>
+            <a href="#download" class="nav-cta">Download SonLink</a>
         </div>
     </nav>
 
+    <main id="main">
     <!-- Hero -->
     <header class="hero">
         <div class="hero-container">
@@ -578,8 +620,8 @@
                 <h1><span class="gradient">SonLink: Wi-Fi TV Remote</span></h1>
                 <p class="lede">Pair with a compatible TV on the same network, then control power, volume, navigation, typing and apps from a focused remote layout.</p>
                 <div class="hero-buttons">
-                    <a href="https://apps.apple.com/hk/app/sony-tv-remote-bravia-tv/id6474549094" class="btn btn-primary" target="_blank">Download on App Store</a>
-                    <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.sony.bravia.tv.remote" class="btn btn-secondary" target="_blank">Get on Google Play</a>
+                    <a href="https://apps.apple.com/hk/app/sony-tv-remote-bravia-tv/id6474549094" class="btn btn-primary" target="_blank" rel="noopener">App Store · iPhone &amp; iPad</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.sony.bravia.tv.remote" class="btn btn-secondary" target="_blank" rel="noopener">Google Play · Android</a>
                 </div>
             </div>
             <div class="hero-mockup">
@@ -604,7 +646,7 @@
                     <span class="tag">Sister app</span>
                     <h3>SuperMote</h3>
                     <p>A broader universal Wi-Fi remote for households with multiple supported TV platforms.</p>
-                    <p style="margin-top: 0.75rem;"><a href="../../index.html#home">Learn more →</a></p>
+                    <p style="margin-top: 0.75rem;"><a href="../supermote/index.html">Learn more about SuperMote →</a></p>
                 </div>
             </div>
         </div>
@@ -703,7 +745,7 @@
                     </div>
                     <div class="compat-item">
                         <h4>📱 Platforms</h4>
-                        <p>iOS 13+ and Android 8.0+. Free download, no account required.</p>
+                        <p>iOS 15.6+ and Android 8.0+. Free download, no account required.</p>
                     </div>
                 </div>
             </div>
@@ -741,46 +783,47 @@
             <div class="section-eyebrow">FAQ</div>
             <h2 class="section-title">Common questions</h2>
             <div class="faq">
-                <div class="faq-item">
-                    <button class="faq-q">My TV doesn't show up in the list. What now?</button>
+                <details class="faq-item">
+                    <summary class="faq-q">My TV doesn't show up in the list. What now?</summary>
                     <div class="faq-a">Confirm your phone and TV are on the same Wi-Fi network rather than a guest network, and enable network remote control in the TV settings if that option is available.</div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-q">Does SonLink collect any personal data?</button>
+                </details>
+                <details class="faq-item">
+                    <summary class="faq-q">Does SonLink collect any personal data?</summary>
                     <div class="faq-a">Remote commands travel over your local Wi-Fi. The app also uses analytics, crash reporting and advertising services. Advertising partners may process device and usage data subject to your consent choices and platform settings. See our Privacy Policy for details.</div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-q">Will it work with every TV?</button>
+                </details>
+                <details class="faq-item">
+                    <summary class="faq-q">Will it work with every TV?</summary>
                     <div class="faq-a">No. Compatibility depends on the local-network remote services supported by the TV model and its settings. You can use in-app discovery to check your TV.</div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-q">I have multiple TV brands. Should I use SonLink?</button>
+                </details>
+                <details class="faq-item">
+                    <summary class="faq-q">I have multiple TV brands. Should I use SonLink?</summary>
                     <div class="faq-a">Use in-app discovery to check each TV. For a wider range of supported platforms, you can also consider our universal app SuperMote.</div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-q">I lost my remote — can my phone replace it?</button>
+                </details>
+                <details class="faq-item">
+                    <summary class="faq-q">I lost my remote — can my phone replace it?</summary>
                     <div class="faq-a">If your TV is compatible and already on Wi-Fi, SonLink can provide power, volume, navigation and app controls. See our guide on <a href="use-phone-as-tv-remote/index.html" style="color:#6cb5ff;">using your phone as a TV remote</a>.</div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-q">Is SonLink free?</button>
-                    <div class="faq-a">Yes — free to download on App Store and Google Play. No subscription, no in-app purchases for core remote features.</div>
-                </div>
+                </details>
+                <details class="faq-item">
+                    <summary class="faq-q">Is SonLink free?</summary>
+                    <div class="faq-a">SonLink is free to download, with core remote controls available free. Optional Premium purchases are available. See your platform’s store listing for current purchase options and details.</div>
+                </details>
             </div>
         </div>
     </section>
 
     <!-- CTA -->
-    <section class="cta">
+    <section class="cta" id="download" tabindex="-1">
         <div class="container">
             <h2>Ready to ditch the lost remote?</h2>
-            <p>Free on App Store and Google Play. Pair in under a minute.</p>
+            <p>Choose your platform. Check the store listing for current compatibility and purchase options.</p>
             <div class="hero-buttons" style="justify-content: center;">
-                <a href="https://apps.apple.com/hk/app/sony-tv-remote-bravia-tv/id6474549094" class="btn btn-primary" target="_blank">Download on App Store</a>
-                <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.sony.bravia.tv.remote" class="btn btn-secondary" target="_blank">Get on Google Play</a>
+                <a href="https://apps.apple.com/hk/app/sony-tv-remote-bravia-tv/id6474549094" class="btn btn-primary" target="_blank" rel="noopener">App Store · iPhone &amp; iPad</a>
+                <a href="https://play.google.com/store/apps/details?id=com.firesharkhk.sony.bravia.tv.remote" class="btn btn-secondary" target="_blank" rel="noopener">Google Play · Android</a>
             </div>
         </div>
     </section>
 
+    </main>
     <footer>
         <div class="footer-links">
             <a href="../../index.html">Back to Fireshark</a>
@@ -793,14 +836,9 @@
     </footer>
 
     <script>
-        // FAQ accordion
-        document.querySelectorAll('.faq-q').forEach(q => {
-            q.addEventListener('click', () => {
-                q.parentElement.classList.toggle('open');
-            });
-        });
 
         // Reveal-on-scroll for feature/why/step cards
+        if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -816,6 +854,12 @@
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(el);
         });
+
+        document.addEventListener('focusin', event => {
+            const card = event.target.closest('.feature, .why-card, .brand-card, .step, .compat-item');
+            if (card) { card.style.opacity = '1'; card.style.transform = 'none'; }
+        });
+        }
     </script>
 </body>
 </html>

@@ -433,9 +433,53 @@
             .hero-screenshot img { border-radius: 14px; }
             section { padding: 4rem 0; }
         }
+
+        /* Keyboard access, text reflow and quiet, immediate feedback. */
+        body { overflow-x: visible; font-family: 'Inter', system-ui, sans-serif; }
+        :focus-visible { outline: 3px solid #b9d9ff; outline-offset: 5px; }
+        a, button, summary { -webkit-tap-highlight-color: rgba(185,217,255,.25); }
+        a:active, button:active, summary:active { filter: brightness(1.2); }
+        section, [id] { scroll-margin-top: 7rem; }
+        .skip-link { position: fixed; top: .75rem; left: .75rem; z-index: 2000; padding: .75rem 1rem; background: #fff; color: #121212; transform: translateY(-200%); }
+        .skip-link:focus { transform: none; }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+            .app-card, .feature, .why-card, .brand-card, .step, .compat-item { opacity: 1 !important; transform: none !important; }
+        }
+
+        .resource-links { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; margin: .8rem 0; }
+        .resource-links .text-link { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: .25em; font-size: .9rem; }
+        .lang-btn { min-height: 44px; }
+        @media (max-width: 600px) {
+            .nav-container { flex-wrap: wrap; padding: .75rem 1rem; gap: .5rem; }
+            .nav-links { flex-wrap: wrap; gap: .5rem; }
+            .hero { padding-top: 10rem; }
+        }
+
+        /* Allow the layout to grow with larger text without page overflow. */
+        h1, h2, h3, p, a { overflow-wrap: anywhere; }
+        .contact-email { max-width: 100%; }
+        .hero-content, .hero-container > *, .source-layout > *, .support-item, .why-card, .feature, .compat-item { min-width: 0; }
+        .hero-content, .hero-eyebrow, .hero-buttons, .btn { max-width: 100%; }
+        .nav-cta { flex-shrink: 1; text-align: center; }
+        .nav-container { flex-wrap: wrap; }
+        .gallery-item { min-width: 0; }
+        .gallery-item img, .hero-mockup img { max-width: 100%; }
+        @media (max-width: 600px) {
+            .container, .hero-container { padding-left: 1rem; padding-right: 1rem; }
+            .why-grid, .gallery, .features-grid, .compat-list, .brands-grid, .support-panel { grid-template-columns: minmax(0, 1fr); }
+            .why-card, .feature, .support-item, .compat-card { padding: 1rem; }
+            .hero-brands { gap: .75rem; }
+            .brand-chip { padding: .75rem; }
+            .hero-eyebrow { white-space: normal; }
+            .hero-buttons .btn { justify-content: center; }
+            .nav-cta { padding: .5rem .75rem; }
+        }
     </style>
 </head>
 <body>
+    <a href="#main" class="skip-link">Skip to content</a>
     <nav class="navbar">
         <div class="nav-container">
             <a href="../../index.html" class="nav-back" data-i18n="navBack">&larr; Fireshark Tech</a>
@@ -451,7 +495,7 @@
         </div>
     </nav>
 
-    <main>
+    <main id="main">
         <section class="hero">
             <div class="hero-container">
                 <div>
@@ -463,9 +507,11 @@
                         <a href="https://chromewebstore.google.com/detail/%E9%A6%99%E6%B8%AF%E5%A4%A9%E6%B0%A3%E8%AD%A6%E5%A0%B1/chmlbbhplbepjboepkcngfnmbellhfge" class="btn btn-primary" target="_blank" rel="noopener" data-i18n="chromeWebStore">Chrome Web Store</a>
                         <a href="https://addons.mozilla.org/zh-TW/firefox/addon/%E9%A6%99%E6%B8%AF%E5%A4%A9%E6%B0%A3%E9%A0%90%E5%A0%B1-hong-kong-weather/" class="btn btn-secondary" target="_blank" rel="noopener" data-i18n="firefoxAddons">Firefox Add-ons</a>
                         <a href="https://microsoftedge.microsoft.com/addons/detail/%E9%A6%99%E6%B8%AF%E5%A4%A9%E6%B0%A3%E8%AD%A6%E5%A0%B1/koemdfkhpkadjclicmmjoaglaapcdlco" class="btn btn-secondary" target="_blank" rel="noopener" data-i18n="edgeAddons">Edge Add-ons</a>
-                        <a href="https://github.com/philipxj/hong-kong-weather-extension" class="btn btn-secondary" target="_blank" rel="noopener" data-i18n="github">GitHub</a>
-                        <a href="#support" class="btn btn-secondary" data-i18n="contactSupport">聯絡支援</a>
-                        <a href="../../legal/hk-weather-alerts-privacy-policy.html" class="btn btn-secondary" data-i18n="privacyPolicy">私隱政策</a>
+                    </div>
+                    <div class="resource-links">
+                        <a href="https://github.com/philipxj/hong-kong-weather-extension" class="text-link" target="_blank" rel="noopener" data-i18n="github">GitHub</a>
+                        <a href="#support" class="text-link" data-i18n="contactSupport">聯絡支援</a>
+                        <a href="../../legal/hk-weather-alerts-privacy-policy.html" class="text-link" data-i18n="privacyPolicy">私隱政策</a>
                     </div>
                     <p class="fine-print" data-i18n="disclaimer">由 Fireshark HK 開發的獨立工具，並非香港天文台官方產品，亦未獲香港天文台授權、認可或背書。</p>
                 </div>
